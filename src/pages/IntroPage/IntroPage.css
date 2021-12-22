@@ -1,0 +1,90 @@
+.intropage__full-div{
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 8rem;
+}
+
+.intropage__inner-div{
+    width: 100%;
+    height: 100%;
+}
+
+.intropage__upper-div{
+
+    height: 40rem;
+    width: 100%;
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.intropage__upper-div__left-div{
+    height: 100%;
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.intropage__upper-div__right-div{
+    height: 100%;
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intropage__upper-div__right-inner-div{
+    width: 100%;
+    height: fit-content;
+}
+
+.intropage__upper-div__right-div__site-name-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.intropage__upper-div__right-div__site-name{
+    font-size: 3rem;
+    font-family: 'Lora';
+    color: 	#5c616e;
+    color: rgb(75,83,188);
+    font-weight: 900;
+}
+
+.intropage__upper-div__right-div__tagline-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.intropage__upper-div__right-div__tagline{
+    font-size: 2rem;
+    font-family: 'Lora';
+    color: 	#242527;
+    font-weight: 900;
+    letter-spacing: 0.1px;
+}
+
+.intropage__upper-div__right-div__buttons-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intropage__button__signup{
+    margin-right: 20px;
+    background-color: white;
+    color: rgb(75,83,188);
+    width: 11rem;
+}
+
+.intropage__button__login{
+    width: 11rem;
+}

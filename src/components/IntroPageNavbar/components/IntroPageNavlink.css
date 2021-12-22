@@ -1,0 +1,36 @@
+.intropagenavlink__full-div{
+    width: fit-content;
+    height: 3rem;
+    padding : 0 20px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 200ms ease-in-out;
+    border-radius: 2px;
+    text-decoration: none;
+}
+
+.intropagenavlink__full-div:hover{
+
+    background-color: rgba(180, 180, 180, 0.411);
+
+}
+
+.intropagenavlink__inner-div{
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: 	#7791a1;
+}
+
+
+.intropagenavlink__link-icon{
+    font-size: 1.4rem;
+}
+
+.intropagenavlink__link-text{
+    margin-left: 10px;
+    font-family: 'Comfortaa' , cursive;
+    font-weight: 500;
+}
