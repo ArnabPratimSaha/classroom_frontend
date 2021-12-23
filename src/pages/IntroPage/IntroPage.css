@@ -2,6 +2,7 @@
     min-height: 100%;
     width: 100%;
     padding-top: 8rem;
+    padding-bottom: 8rem;
 }
 
 .intropage__inner-div{
@@ -11,12 +12,14 @@
 
 .intropage__upper-div{
 
-    height: 40rem;
+    height: calc(100vh - 8.01rem);
     width: 100%;
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
+    /* border-bottom: 1px solid #7791A1; */
 
 }
 
@@ -25,7 +28,7 @@
     width: 48%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .intropage__upper-div__right-div{
@@ -49,11 +52,15 @@
 }
 
 .intropage__upper-div__right-div__site-name{
-    font-size: 3rem;
+    font-size: 4rem;
     font-family: 'Lora';
     color: 	#5c616e;
     color: rgb(75,83,188);
+    color: rgb(92,97,110);
+    color: #24A566;
     font-weight: 900;
+    border-bottom: 2px solid #24A566;
+    cursor: default;
 }
 
 .intropage__upper-div__right-div__tagline-div{
@@ -66,9 +73,24 @@
 .intropage__upper-div__right-div__tagline{
     font-size: 2rem;
     font-family: 'Lora';
-    color: 	#242527;
+    color: 	#7791A1;
     font-weight: 900;
     letter-spacing: 0.1px;
+}
+
+.intropage__upper-div__right-div__tagline2-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.intropage__upper-div__right-div__tagline2{
+    font-size: 1.4rem;
+    font-family: 'Comfortaa';
+    color: 	#637480;
+    font-weight: 900;
+    letter-spacing: 0.001px;
 }
 
 .intropage__upper-div__right-div__buttons-div{
@@ -87,4 +109,43 @@
 
 .intropage__button__login{
     width: 11rem;
+}
+
+.intropage__features-div{
+    text-align: center;
+    margin-top: 50px;
+    width: 100%;
+    /* background: linear-gradient(to right , rgb(122, 121, 190) , rgb(163, 169, 221)); */
+}
+
+.intropage__features-span{
+    font-family: 'Barlow Condensed';
+    font-size: 3rem;
+    color: #0875F7;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.287);
+}
+
+.intropage__features-inner-div{
+    box-sizing: content-box;
+    width: 100%;
+    height: fit-content;
+    margin: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.intropage__features-description-div{
+
+    width: 100%;
+    height: fit-content;
+    /* background: linear-gradient(to right, rgb(136,95,191) , #B9AAED); */
+    position: relative;
+
 }
