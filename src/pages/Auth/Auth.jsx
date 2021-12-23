@@ -16,9 +16,9 @@ function Auth() {
 
         if(id && accessToken && refreshToken){
 
-            Cookies.set('authToken' , {
-                id , accessToken , refreshToken
-            })
+            Cookies.set('id' , id)
+            Cookies.set('accessToken' , accessToken)
+            Cookies.set('refreshToken' , refreshToken)
 
             window.location = '/home';
 
