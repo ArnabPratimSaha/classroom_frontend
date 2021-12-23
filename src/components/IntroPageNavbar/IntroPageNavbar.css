@@ -1,13 +1,15 @@
 .intropagenavbar__full-div{
 
-    width: 100vw;
+    width: 100%;
     height: 8rem;
     position: fixed;
     top: 0;
     left: 0;
     border-bottom: 1px solid #CED1D5;
     box-shadow: -2px 2px 8px #a7a8a8;
+    background-color: #ffffff;
 
+    z-index: 10;
 }
 
 .intropagenavbar__upper-div{
@@ -39,7 +41,7 @@
 
     font-size: 2rem;
     font-family: 'Lora';
-    color: 	#5c616e;
+    color: 	#24A566;
     font-weight: 900;
 
 }

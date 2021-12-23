@@ -1,0 +1,38 @@
+.features__full-div{
+    width: 25%;
+    max-width: 400px;
+    min-width: 250px;
+    height: 14rem;
+    border-radius: 5px;
+    padding: 20px 40px;
+    margin: 20px 0;
+    background-color: transparent;
+    transition: transform 200ms ease-in-out , background-color 200ms ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+.features__full-div:hover{
+    background-color: #cecece28;
+    transform: scale(1.05);
+}
+
+.features__icon-div{
+    width: 100%;
+    height: 9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.features__text-div{
+    width: 100%;
+    text-align: center;
+}
+
+.features__text{
+    font-family: 'Barlow Condensed' , cursive;
+    font-weight: 900;
+    color: #0875F7;
+    font-size: 1.2rem;
+}

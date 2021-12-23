@@ -19,6 +19,9 @@ function IntroPageNavbar() {
                     <Buttons
                         icon = {<AiOutlineLogin/>}
                         text = 'Sign in'
+                        onClick={() => {
+                            window.location = 'http://localhost:5000/auth';
+                        }}
                     />
                 </div>
             </div>
