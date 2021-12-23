@@ -6,7 +6,7 @@ function Home() {
 
     useEffect(() => {
 
-        const cookie = Cookies.get('authToken');
+        const cookie = Cookies.get('id');
         console.log(cookie);
 
     },[])
