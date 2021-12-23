@@ -1,0 +1,70 @@
+.feature-description__full-div{
+
+    box-sizing: content-box;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.feature-description__lotti-div{
+
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.feature-description__lotti{
+    width: 100%;
+    height: 100%;
+}
+
+.feature-description__text-div{
+    width: 40%;
+    height: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    font-family: 'Comfortaa';
+    color: #24A566;
+    letter-spacing: 0.25px;
+    word-spacing: 1px;
+    line-height: 25px;
+    margin: 5px;
+    padding: 20px;
+    border: 2px solid #24A566;
+    position: relative;
+    opacity: 0;
+    transition: transform 1s ease-in-out , opacity 1s ease-in-out;
+}
+
+.feature-description__text-div__before{
+    
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: #24A566;
+    left: 1px;
+    bottom: 1px;
+
+}
+
+
+.feature-description__text-div__after{
+
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: #24A566;
+    right: 1px;
+    top: 1px;
+
+}

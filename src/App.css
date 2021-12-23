@@ -6,3 +6,15 @@
 *{
 	box-sizing: border-box;
 }
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.underline{
+    background-color: #CED0D4;
+    height: 1px;
+    width: 100%;
+    margin: 0 auto;
+}
