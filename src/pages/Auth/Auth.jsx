@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import './Auth.css'
 import { useSearchParams } from 'react-router-dom'
-import axios from 'axios'
 import Cookies from 'js-cookie'
 
 function Auth() {

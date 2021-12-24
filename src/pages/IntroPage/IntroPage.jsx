@@ -20,12 +20,15 @@ import Features from './components/Features';
 import FeatureDescription from './components/FeatureDescription';
 
 function IntroPage() {
+
+
     return (
         <div className='intropage__full-div'>
             <IntroPageNavbar/>
             <div className='intropage__inner-div'>
                 <div className='intropage__upper-div'>
-                    <div className='intropage__upper-div__left-div'>
+
+                     <div className='intropage__upper-div__left-div'>
                         <LottiAnimation
                             lotti = {intropageLotti1}
                             height = '100%'
@@ -50,6 +53,9 @@ function IntroPage() {
                                     icon = {<IoPersonAddOutline/>}
                                     text = 'Get Started'
                                     className='intropage__button__signup'
+                                    onClick = {() => {
+                                        window.location = 'http://localhost:5000/auth';
+                                    }}
                                 />
                                 <Buttons
                                     icon = {<AiOutlineLogin/>}
@@ -69,10 +75,20 @@ function IntroPage() {
                         <Features
                             lotti = {OnlineClassroomLotti}
                             text = 'Virtual Classrooms'
+                            onClick={() => {
+                                    document.getElementById('feature-description__1').scrollIntoView({
+                                        behavior : 'smooth'
+                                    })
+                            }}
                         />
                         <Features
                             lotti = {AssignmentLotti}
                             text = 'Assignments & Exams'
+                            onClick={() => {
+                                    document.getElementById('feature-description__2').scrollIntoView({
+                                        behavior : 'smooth'
+                                    })
+                            }}
                         />
                         <Features
                             lotti = {ChatFeatureLotti}
@@ -80,29 +96,40 @@ function IntroPage() {
                             lottiStyle = {{
                                 transform : 'translateY(-15px)'
                             }}
+                            onClick={() => {
+                                    document.getElementById('feature-description__3').scrollIntoView({
+                                        behavior : 'smooth'
+                                    })
+                            }}
                         />
                     </div>
                 </div>
 
                 <div className='intropage__features-description-div'>
                     <FeatureDescription
+                        id = 'feature-description__1'
                         lotti={OnlineClassroomDescriptionLotti}
                         isLottiInLeft = {false}
+                        title = 'Virtual Classrooms'
                     />
-                    <div style = {{width : '70%' , marginBottom : '60px'}} className='underline'></div>
+                    <br/>
                     <FeatureDescription
+                        id = 'feature-description__2'
                         style = {{
                             flexDirection : 'row-reverse'
                         }}
                         isTextInLeft = {true}
                         lotti={AssignmentDescriptionLotti}
                         color = 'orange'
+                        title = 'Assignments & Exams'
                     />
-                    <div style = {{width : '70%'}} className='underline'></div>
+                    <br/>
                     <FeatureDescription
+                        id = 'feature-description__3'
                         isLottiInLeft = {false}
                         color = '#3155BE'
                         lotti={ChatsDescriptionLotti}
+                        title = 'Asking for help'
                     />
                 </div>
 
