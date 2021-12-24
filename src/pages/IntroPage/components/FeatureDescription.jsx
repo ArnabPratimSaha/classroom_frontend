@@ -2,7 +2,7 @@ import React, { memo, useEffect, useRef } from 'react'
 import LottiAnimation from '../../../components/LottiAnimation/LottiAnimation'
 import './FeatureDescription.css'
 
-function FeatureDescription({lotti , description , style , color , isTextInLeft}) {
+function FeatureDescription({lotti , description , style , color , isTextInLeft , title , id}) {
 
     const ref = useRef();
     const textRef = useRef();
@@ -24,7 +24,7 @@ function FeatureDescription({lotti , description , style , color , isTextInLeft}
       }, [])
 
     return (
-        <div ref = {ref} style = {style && style} className='feature-description__full-div'>
+        <div ref = {ref} id = {id && id} style = {style && style} className='feature-description__full-div'>
             <div className='feature-description__lotti-div'>
 
                 <LottiAnimation
@@ -36,6 +36,9 @@ function FeatureDescription({lotti , description , style , color , isTextInLeft}
 
             </div>
             <div ref = {textRef} style={{borderColor : color && color , color : color && color , transform : `translateX(${isTextInLeft ? '-' : '+'}30px) scale(0.9)` , transformOrigin : `${isTextInLeft ? 'bottom left' : 'bottom right'}`}} className='feature-description__text-div'>
+                <div className='feature-description__header-div'>
+                    <span className='feature-description__header'>{title && title}</span>
+                </div>
                 <span className='feature-description__text'>
 
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book

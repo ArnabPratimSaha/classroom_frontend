@@ -1,5 +1,6 @@
 import "./App.css";
 import IntroPage from "./pages/IntroPage/IntroPage";
+import Signup from './pages/signup/Signup'
 import Auth from './pages/Auth/Auth'
 import Home from "./pages/Home/Home";
 import Error from './pages/Error/Error';
@@ -12,6 +13,7 @@ function App() {
         <Routes>
 
           <Route path = '/' element = {<IntroPage/>}/>
+          <Route path = '/signup' element = {<Signup/>}/>
           <Route path = '/auth' element = {<Auth/>}/>
           <Route path = '/home' element = {<Home/>}/>
           <Route path = '/error' element = {<Error/>}/>

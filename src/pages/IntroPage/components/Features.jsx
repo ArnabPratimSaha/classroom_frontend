@@ -4,9 +4,16 @@ import './Features.css'
 
 // Virtual Classrooms , Assignments & Exams , Chats
 
-function Features({text , lotti , lottiStyle}) {
+function Features({text , lotti , lottiStyle , onClick}) {
+
+
+
     return (
-        <div className='features__full-div'>
+        <div onClick={() => {
+
+            onClick && onClick();
+
+        }} className='features__full-div'>
             <div style={lottiStyle && lottiStyle} className='features__icon-div'>
                 <LottiAnimation
                     lotti = { lotti && lotti }

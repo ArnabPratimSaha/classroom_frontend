@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import IntroPageNavlink from './components/IntroPageNavlink'
 import './IntroPageNavbar.css'
 
@@ -9,6 +9,30 @@ import {AiOutlineLogin} from 'react-icons/ai'
 import Buttons from '../Buttons/Buttons'
 
 function IntroPageNavbar() {
+
+    const burgerButtonRef = useRef();
+    const mobileNavbarRef = useRef();
+
+    const BurgerButtonClickHandler = (e) => {
+
+        if(burgerButtonRef && burgerButtonRef.current){
+
+            if([...burgerButtonRef.current.classList].includes('open-intropage__navbar')){
+                
+                burgerButtonRef.current.classList.remove('open-intropage__navbar')
+                mobileNavbarRef.current.style.display = 'none';
+
+            }else{
+
+                burgerButtonRef.current.classList.add('open-intropage__navbar')
+                mobileNavbarRef.current.style.display = 'block';
+
+            }
+            
+        }
+
+    }
+
     return (
         <div className='intropagenavbar__full-div'>
             <div className='intropagenavbar__upper-div'>
@@ -47,6 +71,31 @@ function IntroPageNavbar() {
                         linkText = 'About Us'
                         linkIcon={<FaRegIdCard/>}
                     />
+                </div>
+                <div onClick = {BurgerButtonClickHandler} className='intropagenavbar__burger-button__div'>
+                    <div ref = {burgerButtonRef} className='intropagenavbar__burger-button'></div>
+                </div>
+
+                <div ref = {mobileNavbarRef} className='intropage__mobile-navbar'>
+                    <div className='intropage__mobile-navbar__inner-div'>
+                        <div className='intropage__mobile-navbar__navlinks-div'>
+                            <IntroPageNavlink
+                            link = 'whyus'
+                            linkText = 'Why Us'
+                            linkIcon = {<BsPatchQuestion/>}
+                            />
+                            <IntroPageNavlink
+                                link = 'products'
+                                linkText = 'Other Products'
+                                linkIcon={<MdOutlineProductionQuantityLimits/>}
+                            />
+                            <IntroPageNavlink
+                                link = 'about'
+                                linkText = 'About Us'
+                                linkIcon={<FaRegIdCard/>}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

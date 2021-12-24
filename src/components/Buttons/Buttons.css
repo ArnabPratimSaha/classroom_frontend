@@ -61,3 +61,11 @@
     font-size: 1.1rem;
 
 }
+
+@media(max-width : 500px){
+
+    .buttons__full-div{
+        transform: scale(0.8);
+    }
+
+}
