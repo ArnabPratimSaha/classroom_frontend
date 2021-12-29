@@ -6,6 +6,16 @@ import { MdRssFeed } from "react-icons/md";
 import { BsPen, BsPeople } from "react-icons/bs";
 import Avatar from "../Avatar/Avatar";
 
+const DropDownDiv = () => {
+
+    return(
+        <div className="drop-down__div">
+
+        </div>
+    )
+
+}
+
 const TopNavBar = () => {
     const dropDownRef = useRef();
 
@@ -18,14 +28,19 @@ const TopNavBar = () => {
     return (
         <div className="top-navbar__full-div">
             <div className="top-navbar__logo-div"></div>
+
             <div className="top-navbar__navlinks-div">
                 <TopNavbarNavlinks text="Class Feed" to="/home" icon={<MdRssFeed />} />
                 <TopNavbarNavlinks text="To-Do" to="/todo" icon={<BsPen />} />
                 <TopNavbarNavlinks text="People" to="/people" icon={<BsPeople />} />
             </div>
+
             <div className="top-navbar__right-div">
                 <div className="top-navbar__join-create-class__div">
-                    <IoAddCircleOutline className="top-navbar__join-create-class__icon" onClick={addOrJoinClassButtonClickHandler} />
+                    <IoAddCircleOutline
+                        className="top-navbar__join-create-class__icon"
+                        onClick={addOrJoinClassButtonClickHandler}
+                    />
                     <div
                         ref={dropDownRef}
                         className="top-navbar__join-create-class__drop-down__div"
@@ -38,7 +53,7 @@ const TopNavBar = () => {
                         </div>
                     </div>
                 </div>
-                <Avatar image="https://cdn.imgbin.com/14/14/14/imgbin-avatar-beard-icon-bearded-uncle-u7a1CeQFm4JCA4v8a97sbEgsa.jpg" />
+                <Avatar height="3.5rem" width="3.5rem" />
             </div>
         </div>
     );
