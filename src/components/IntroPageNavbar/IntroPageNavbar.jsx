@@ -18,15 +18,15 @@ function IntroPageNavbar() {
         if(burgerButtonRef && burgerButtonRef.current){
 
             if([...burgerButtonRef.current.classList].includes('open-intropage__navbar')){
-                
+                //  close
                 burgerButtonRef.current.classList.remove('open-intropage__navbar')
                 mobileNavbarRef.current.style.display = 'none';
 
-            }else{
 
+            }else{
+                //  open
                 burgerButtonRef.current.classList.add('open-intropage__navbar')
                 mobileNavbarRef.current.style.display = 'block';
-
             }
             
         }
@@ -80,19 +80,22 @@ function IntroPageNavbar() {
                     <div className='intropage__mobile-navbar__inner-div'>
                         <div className='intropage__mobile-navbar__navlinks-div'>
                             <IntroPageNavlink
-                            link = 'whyus'
-                            linkText = 'Why Us'
-                            linkIcon = {<BsPatchQuestion/>}
+                                link = 'whyus'
+                                linkText = 'Why Us'
+                                linkIcon = {<BsPatchQuestion/>}
+                                className = 'mobile-navbar__navlinks'
                             />
                             <IntroPageNavlink
                                 link = 'products'
                                 linkText = 'Other Products'
                                 linkIcon={<MdOutlineProductionQuantityLimits/>}
+                                className = 'mobile-navbar__navlinks'
                             />
                             <IntroPageNavlink
                                 link = 'about'
                                 linkText = 'About Us'
                                 linkIcon={<FaRegIdCard/>}
+                                className = 'mobile-navbar__navlinks'
                             />
                         </div>
                     </div>

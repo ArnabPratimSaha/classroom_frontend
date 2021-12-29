@@ -1,0 +1,104 @@
+.top-navbar__full-div{
+    width: 100%;
+    height: 4rem;
+    background-color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 4px #E0DFDC;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.top-navbar__logo-div{
+    height: 100%;
+    width: 8rem;
+    background-color: turquoise;
+}
+
+.top-navbar__navlinks-div{
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50% , -50%);
+}
+
+.top-navbar__right-div{
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.top-navbar__join-create-class__div{
+    font-size: 2.5rem;
+    color: #CED0D4;
+    margin-right: 20px;
+    position: relative;
+}
+
+.top-navbar__join-create-class__icon{
+    cursor: pointer;
+}
+
+.top-navbar__join-create-class__drop-down__div{
+    box-sizing: content-box;
+    background-color: white;
+    height: fit-content;
+    width: 8rem;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 4px #e0dfdc);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 15px 10px;
+    z-index: 1;
+}
+
+.open-drop-down__div.top-navbar__join-create-class__drop-down__div{
+    z-index: 1;
+    display: block;
+    display: flexbox;
+}
+
+.top-navbar__join-create-class__drop-down__div::before{
+    content: ""; 
+    height: 1rem;
+    width: 1rem;
+    background-color: white;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    transform: rotate(45deg) translate(-7px,-6px);
+    z-index: 2;
+    cursor: default;
+}
+
+.top-navbar__join-create-class__drop-down__items{
+    box-sizing: content-box;
+    width: 100%;
+    height: 2rem;
+    color: #474747;
+    letter-spacing: 0.001px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    padding-left: 20px;
+    font-family: 'Barlow Condensed';
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.1px;
+    cursor: pointer;
+}
