@@ -54,7 +54,6 @@
 
 .intropagenavbar__signin-div{
     width: 10rem;
-    margin-right: 10px;
 }
 
 .intropagenavbar__burger-button__div{
@@ -176,5 +175,6 @@
     .intropagenavbar__navlinks-div{
         display: none;
     }
+
 
 }
