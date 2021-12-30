@@ -1,0 +1,24 @@
+.avatar__full-div{
+    width: fit-content;
+    height: fit-content;
+    border: 2px solid #607D8B;
+    cursor: pointer;
+    border-radius: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-tracks: center;
+    background-color: white;
+    /* filter: drop-shadow(0 0 2px #c0c0c0); */
+}
+
+.avatar-image{
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    transition: transform 500ms ease-in-out;
+}
+
+.avatar-image:hover{
+    transform: scale(1.1);
+}

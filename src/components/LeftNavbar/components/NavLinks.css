@@ -1,0 +1,37 @@
+.leftnavbar-navlinks__full-div{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 0 2rem 2rem 0;
+    padding-left: 20px;
+    transition: background-color 200ms ease-in-out;
+    color: #7791A1;
+    margin-bottom: 10px;
+}
+
+.leftnavbar-navlinks__full-div:hover{
+    background-color: #f2f2f2;
+}
+
+.leftnavbar-navlinks__full-div:active{
+    box-shadow: inset 2px 2px 5px rgba(0 , 0 , 0 , 0.5);
+}
+
+.leftnavbar-navlinks__icon-div{
+    font-size: 1.6rem;
+    margin-right: 20px;
+}
+
+.leftnavbar-navlinks__text-div{
+    width: fit-content;
+    height: fit-content;
+}
+
+.leftnavbar-navlinks__text{
+    font-family: 'Barlow Condensed';
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.1px;
+}

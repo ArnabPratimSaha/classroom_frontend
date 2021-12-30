@@ -4,7 +4,7 @@
     padding : 0 20px;
     cursor: pointer;
     background-color: transparent;
-    transition: background-color 200ms ease-in-out;
+    transition: background-color 200ms ease-in-out , transform 500ms ease-in-out , opacity 500ms ease-in-out;
     border-radius: 2px;
     text-decoration: none;
 }
