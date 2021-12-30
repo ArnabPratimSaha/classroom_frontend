@@ -7,11 +7,11 @@ import ClassCard from '../../components/ClassCard/ClassCard';
 
 function Home() {
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const cookie = Cookies.get('id');
+        
 
-    },[])
+    // },[])
 
     return (
         <div className='home-page__full-div'>

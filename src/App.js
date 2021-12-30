@@ -11,14 +11,15 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from 'axios'
 
-const useAuth = async() => {
+const useAuth = () => {
   // implement auth logic and redux
 
   const [isAuth , setIsAuth] = useState(false);
+  const [isLoading , setIsLoading] = useState(true);
 
-  // useEffect(() => {
+  useEffect(() => {
     
-    // const func = async() => {
+    const func = async() => {
       
       
       const accesstoken = Cookies.get('accessToken');
@@ -26,9 +27,6 @@ const useAuth = async() => {
       const id = Cookies.get('id');
       
       try {
-        
-        
-        console.log('on');
         
         const res = await axios({
           method : 'get',
@@ -39,7 +37,7 @@ const useAuth = async() => {
         })
         
         if(res.status === 200){
-          return true;
+          setIsAuth(true);
         }
 
       } catch (error) {
@@ -47,23 +45,27 @@ const useAuth = async() => {
         if(axios.isAxiosError(error)){
 
           console.log(error.message);
-          return false
 
         }
 
       }
 
-    // }
+      setIsLoading(false);
 
-    // return func();
+    }
 
-  // },[])
+    func();
 
-  // return isAuth;
+  },[])
+
+  return {isAuth  , isLoading};
 }
 
-const ProtectedRoutes = async() => {
-  return await useAuth() ? <Outlet/> : <IntroPage/>
+const ProtectedRoutes = () => {
+
+  const {isAuth , isLoading} = useAuth();
+
+  return isLoading ? <div>Loading</div>: (isAuth ? <Outlet/> : <IntroPage/>) 
 }
 
 function App() {
