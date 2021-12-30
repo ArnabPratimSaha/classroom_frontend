@@ -9,6 +9,7 @@
     transition: background-color 200ms ease-in-out;
     color: #7791A1;
     margin-bottom: 10px;
+    min-width: 250px;
 }
 
 .leftnavbar-navlinks__full-div:hover{

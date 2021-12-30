@@ -3,7 +3,7 @@ import { forwardRef, memo } from 'react';
 
 const DropDownDiv = ({ itemArray } , ref) => {
     return (
-        <div ref = {ref && ref} className="drop-down__div">
+        <div ref = {ref && ref}  className="drop-down__div">
             {itemArray &&
                 itemArray.map((eachItem) => {
 

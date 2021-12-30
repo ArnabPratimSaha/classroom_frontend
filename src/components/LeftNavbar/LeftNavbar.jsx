@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useRef, useState } from "react";
 import NavLinks from "./components/NavLinks";
 import "./LeftNavbar.css";
 
@@ -16,24 +16,44 @@ const ClassAvatar = ({class_name , style}) => {
 }
 
 const LeftNavbar = () => {
+
+    const [isOpened , setIsOpened] = useState(false);
+    const burgerButtonRef = useRef();
+
+    const hamburgerButtonClickHandler = () => {
+
+        burgerButtonRef.current.classList.toggle('open-intropage__navbar')
+        setIsOpened(prev => !prev)
+
+    }
+
     return (
-        <div className="leftnavbar__fulldiv">
+        <div style = {{width : isOpened && '17rem'}} className="leftnavbar__fulldiv">
+
+                <div onClick = {() => {hamburgerButtonClickHandler()}} className='leftnavbar__burger-button__div'>
+                    <div ref = {burgerButtonRef} className='leftnavbar__burger-button'></div>
+                </div>
+
             <div className="leftnavbar__navlinks__outer-div">
                 <div className="leftnavbar__navlinks__inner-div">
+
                     <NavLinks
                         icon={<AiOutlineHome />}
                         text="Home"
                         to="/home"
+                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
                     />
                     <NavLinks
                         icon={<AiOutlineCalendar />}
                         text="Calendar"
                         to="/calendar"
+                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
                     />
                     <NavLinks
                         icon={<ImFilesEmpty />}
                         text="Private Files"
                         to="/privatefiles"
+                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
                     />
                 </div>
                 <div className="underline"></div>
@@ -56,16 +76,28 @@ const LeftNavbar = () => {
                         icon={<ClassAvatar class_name = 'C++' />}
                         text="C++"
                         to="/home"
+                        style = {{
+                            paddingLeft : '12px'
+                        }}
+                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
                     />
                     <NavLinks
                         icon={<ClassAvatar style = {{backgroundColor : '#607D8B'}} class_name = 'OOP' />}
                         text="OOP"
                         to="/calendar"
+                        style = {{
+                            paddingLeft : '12px'
+                        }}
+                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
                     />
                     <NavLinks
                         icon={<ClassAvatar class_name = 'SAS' />}
                         text="SAS"
                         to="/privatefiles"
+                        style = {{
+                            paddingLeft : '12px'
+                        }}
+                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
                     />
                 </div>
             </div>

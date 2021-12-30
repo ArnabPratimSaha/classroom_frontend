@@ -7,8 +7,9 @@
     right: 0;
     top: 100%;
     border-radius: 5px;
-    filter: drop-shadow(0 0 4px #e0dfdc);
-    /* display: none; */
+    /* filter: drop-shadow(0 0 2px #E0DFDC); */
+    border: 1px solid #E0DFDC;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
@@ -33,6 +34,8 @@
     transform: rotate(45deg);
     z-index: 2;
     cursor: default;
+    border-left: 1px solid #E0DFDC;
+    border-top: 1px solid #E0DFDC;
 }
 
 .drop-down__div-items{
