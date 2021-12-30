@@ -10,12 +10,12 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    padding-left: 4rem;
 }
 
 .top-navbar__logo-div{
     height: 100%;
     width: 8rem;
-    background-color: turquoise;
 }
 
 .top-navbar__navlinks-div{

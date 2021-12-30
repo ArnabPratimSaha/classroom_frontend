@@ -19,7 +19,9 @@ const TopNavBar = () => {
 
     return (
         <div className="top-navbar__full-div">
-            <div className="top-navbar__logo-div"></div>
+            <div className="top-navbar__logo-div">
+                O-class
+            </div>
 
             <div className="top-navbar__navlinks-div">
                 <TopNavbarNavlinks text="Class Feed" to="/home" icon={<MdRssFeed />} />
