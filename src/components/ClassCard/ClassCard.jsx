@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import Avatar from "../Avatar/Avatar";
+import DropDownDiv from "../TopNavBar/components/DropDownDiv";
 import "./ClassCard.css";
 
 const ClassCard = ({
@@ -43,6 +44,9 @@ const ClassCard = ({
             </div>
             <div className="class-card__dots-div">
                 <BiDotsVerticalRounded/>
+                <DropDownDiv
+                    itemArray = {[<span onClick = {() => {console.log('visit')}}>Visit</span>,<span>Archive</span> , <span>UnEnroll</span> , <span>Report</span>]}
+                />
             </div>
         </div>
     );

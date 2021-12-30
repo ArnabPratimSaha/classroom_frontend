@@ -5,16 +5,8 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { MdRssFeed } from "react-icons/md";
 import { BsPen, BsPeople } from "react-icons/bs";
 import Avatar from "../Avatar/Avatar";
+import DropDownDiv from "./components/DropDownDiv";
 
-const DropDownDiv = () => {
-
-    return(
-        <div className="drop-down__div">
-
-        </div>
-    )
-
-}
 
 const TopNavBar = () => {
     const dropDownRef = useRef();
@@ -41,7 +33,7 @@ const TopNavBar = () => {
                         className="top-navbar__join-create-class__icon"
                         onClick={addOrJoinClassButtonClickHandler}
                     />
-                    <div
+                    {/* <div
                         ref={dropDownRef}
                         className="top-navbar__join-create-class__drop-down__div"
                     >
@@ -51,7 +43,11 @@ const TopNavBar = () => {
                         <div className="top-navbar__join-create-class__drop-down__items">
                             Create Class
                         </div>
-                    </div>
+                    </div> */}
+                    <DropDownDiv
+                        ref = {dropDownRef}
+                        itemArray = {[<span key = {1}>Join Class</span> , <span key = {2}>Create Class</span>]}
+                    />
                 </div>
                 <Avatar height="3.5rem" width="3.5rem" />
             </div>
