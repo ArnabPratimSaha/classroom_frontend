@@ -8,8 +8,8 @@
     background-color: transparent;
     transition: background-color 200ms ease-in-out;
     color: #7791a1;
-    padding: 5px 15px;
-    margin: 0 5px;
+    padding: 5px;
+    margin: 0 10px;
     border-bottom: 3px solid transparent;
 }
 
@@ -28,7 +28,8 @@
 }
 
 .top-navbar__navlinks__text-div{
-
+    width: fit-content;
+    height: fit-content;
 }
 
 .top-navbar__navlinks__text{

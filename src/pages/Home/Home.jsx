@@ -31,6 +31,16 @@ function Home() {
                         className="Object Oriented Programming"
                         department="Computer Science and Engineering"
                     />
+                    <ClassCard
+                        adminName="Sushanta Saren"
+                        className="Object Oriented Programming"
+                        department="Computer Science and Engineering"
+                    />
+                    <ClassCard
+                        adminName="Sushanta Saren"
+                        className="Object Oriented Programming"
+                        department="Computer Science and Engineering"
+                    />
                 </div>
             </div>
         </div>

@@ -157,3 +157,13 @@
     transform: rotate(-45deg) translateX(9px) translateY(12px);
 
 }
+
+@media(max-width : 600px){
+    .leftnavbar__fulldiv{
+        left: -4rem;
+    }
+
+    .leftnavbar__burger-button__div{
+        left: 72px;
+    }
+}
