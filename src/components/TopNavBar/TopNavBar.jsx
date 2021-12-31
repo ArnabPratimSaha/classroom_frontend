@@ -20,13 +20,25 @@ const TopNavBar = () => {
     return (
         <div className="top-navbar__full-div">
             <div className="top-navbar__logo-div">
-                O-class
+                O-Class
             </div>
 
             <div className="top-navbar__navlinks-div">
-                <TopNavbarNavlinks text="Class Feed" to="/home" icon={<MdRssFeed />} />
-                <TopNavbarNavlinks text="To-Do" to="/todo" icon={<BsPen />} />
-                <TopNavbarNavlinks text="People" to="/people" icon={<BsPeople />} />
+                <TopNavbarNavlinks
+                    text={ window.innerWidth > 600 && "Class Feed"}
+                    to="/home"
+                    icon={<MdRssFeed />}
+                />
+                <TopNavbarNavlinks
+                    text={ window.innerWidth > 600 &&"To-Do"}
+                    to="/todo"
+                    icon={<BsPen />}
+                />
+                <TopNavbarNavlinks
+                    text={ window.innerWidth > 600 &&"People"}
+                    to="/people"
+                    icon={<BsPeople />}
+                />
             </div>
 
             <div className="top-navbar__right-div">
@@ -47,8 +59,8 @@ const TopNavBar = () => {
                         </div>
                     </div> */}
                     <DropDownDiv
-                        ref = {dropDownRef}
-                        itemArray = {[<span key = {1}>Join Class</span> , <span key = {2}>Create Class</span>]}
+                        ref={dropDownRef}
+                        itemArray={[<span key={1}>Join Class</span>, <span key={2}>Create Class</span>]}
                     />
                 </div>
                 <Avatar height="3.5rem" width="3.5rem" />

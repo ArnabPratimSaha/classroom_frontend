@@ -28,9 +28,9 @@ const LeftNavbar = () => {
     }
 
     return (
-        <div style = {{width : isOpened && '17rem'}} className="leftnavbar__fulldiv">
+        <div style = {{width : isOpened && '17rem' , left : isOpened && '0'}} className="leftnavbar__fulldiv">
 
-                <div onClick = {() => {hamburgerButtonClickHandler()}} className='leftnavbar__burger-button__div'>
+                <div style = {{left : isOpened && '8px'}} onClick = {() => {hamburgerButtonClickHandler()}} className='leftnavbar__burger-button__div'>
                     <div ref = {burgerButtonRef} className='leftnavbar__burger-button'></div>
                 </div>
 
