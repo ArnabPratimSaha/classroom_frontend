@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useRef } from "react";
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import Avatar from "../Avatar/Avatar";
 import DropDownDiv from "../TopNavBar/components/DropDownDiv";
@@ -11,6 +11,9 @@ const ClassCard = ({
     className,
     adminName,
 }) => {
+
+    const dropDownDivRef = useRef();
+
     return (
         <div className="class-card__full-div">
             <div className="class-card__upper-div">
@@ -43,8 +46,15 @@ const ClassCard = ({
                 </div>
             </div>
             <div className="class-card__dots-div">
-                <BiDotsVerticalRounded/>
+                <div onClick = {() => {
+                    if(dropDownDivRef && dropDownDivRef.current){
+                        dropDownDivRef.current.classList.toggle('open-drop-down__div');
+                    }
+                }} className="class-card__dots-icon-div">
+                    <BiDotsVerticalRounded/>
+                </div>
                 <DropDownDiv
+                    ref = {dropDownDivRef}
                     itemArray = {[<span onClick = {() => {console.log('visit')}}>Visit</span>,<span>Archive</span> , <span>UnEnroll</span> , <span>Report</span>]}
                 />
             </div>

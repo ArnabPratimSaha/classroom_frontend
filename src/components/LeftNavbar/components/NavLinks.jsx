@@ -8,10 +8,10 @@ const defaultActiveStyle = {
   backgroundColor: "#f2f2f2",
 };
 
-const NavLinks = ({ icon, text, to, onClick , activeStyle }) => {
+const NavLinks = ({ icon, text, to, onClick , activeStyle , style }) => {
   return (
     <NavLink
-      style={({ isActive }) => (isActive ? (activeStyle ? activeStyle : defaultActiveStyle) : undefined)}
+      style={({ isActive }) => (isActive ? (activeStyle ? {...defaultActiveStyle,...style,...activeStyle} : {...defaultActiveStyle,...style}) : style)}
       to={to && to}
       className="leftnavbar-navlinks__full-div"
     >
