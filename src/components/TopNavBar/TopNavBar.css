@@ -124,6 +124,101 @@
     cursor: pointer;
 }
 
+.top-navbar__modal{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    background-color: rgba(255 , 255 , 255 , 0.3);
+    backdrop-filter: blur(2px);
+}
+
+/* < ------------------------- Create Class --------------------------> */
+
+.top-navbar__create-class__div{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 30rem;
+    width: 30rem;
+    background-color: white;
+    z-index: 21;
+    border-radius: 5px;
+    border: 1px solid #E0DFDC;
+    filter: drop-shadow(0 0 2px #E0DFDC);
+    overflow-x: scroll;
+}
+
+/* .top-navbar__create-class__div::-webkit-scrollbar{
+    width: 0;
+} */
+
+
+.top-navbar__create-class__inner-div{
+    height: 100%;
+    width: 400%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.create-class__carousel-item__div{
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    font-family: 'Barlow Condensed';
+    overflow-y: scroll;
+}
+
+.create-class__carousel-item__div::-webkit-scrollbar{
+    width: 0;
+}
+
+.top-navbar__create-class__terms_conditions__div{
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    font-family: 'Barlow Condensed';
+    overflow-y: scroll;
+}
+
+.top-navbar__create-class__terms_conditions__header{
+    font-size: 2rem;
+    display: block;
+    font-weight: 600;
+    color: #474747;
+}
+
+.top-navbar__create-class__terms_conditions{
+    color: grey;
+    font-size: 1.1rem;
+    /* letter-spacing: 1px;
+    word-spacing: 2px; */
+}
+
+.top-navbar__create-class__terms_conditions__input-div{
+    width: 100%;
+    height: fit-content;
+    background-color: #ececec;
+    padding: 10px 2px 10px 1px;
+    border-radius: 2px;
+}
+
+.top-navbar__create-class__next-button{
+    display: block;
+    margin: 10px 0 0 auto;
+}
+
+.create-class__info-div{
+    /* width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    font-family: 'Barlow Condensed';
+    overflow-y: scroll; */
+}
 
 @media(max-width : 750px){
 

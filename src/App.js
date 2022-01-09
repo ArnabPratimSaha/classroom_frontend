@@ -10,73 +10,43 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Outlet,
+  Navigate,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import axios from "axios";
+import useAuth from "./Hooks/useAuth";
+import ProtectedRoutes from "./pages/ProtectedRoutes/ProtectedRoutes";
+import ClassPage from "./pages/ClassPage/ClassPage";
+import TopNavBar from "./components/TopNavBar/TopNavBar";
+import LeftNavbar from "./components/LeftNavbar/LeftNavbar";
 
-const useAuth = () => {
-  // implement auth logic and redux
-
-  const [isAuth, setIsAuth] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const func = async () => {
-      const accesstoken = Cookies.get("accessToken");
-      const refreshtoken = Cookies.get("refreshToken");
-      const id = Cookies.get("id");
-
-      try {
-        const res = await axios({
-          method: "get",
-          url: `${process.env.REACT_APP_API}/user/info`,
-          headers: {
-            id,
-            accesstoken,
-            refreshtoken,
-          },
-        });
-
-        if (res.status === 200) {
-          setIsAuth(true);
-        }
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          console.log(error.message);
-        }
-      }
-
-      setIsLoading(false);
-    };
-
-    func();
-  }, []);
-
-  return { isAuth, isLoading };
-};
-
-const ProtectedRoutes = () => {
-  const { isAuth, isLoading } = useAuth();
-
-  return isLoading ? <div>Loading</div> : isAuth ? <Outlet /> : <IntroPage />;
-};
+const unprotectedRoutes = new Set('/','/signup','/auth','/error');
 
 function App() {
+
+  const [isAuth , isLoading , login , signup , logOut] = useAuth();
+
   return (
     <div className="App">
       <Router>
+        {!unprotectedRoutes.has(window.location.pathname) && isAuth && <TopNavBar/>}
+        {!unprotectedRoutes.has(window.location.pathname) && isAuth && <LeftNavbar/>}
         <Routes>
           <Route path="/" element={<IntroPage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/error" element={<Error />} />
 
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/error" element={<Error />} />
+          <Route element={
+            <ProtectedRoutes
+            isAuth = {isAuth}
+            isLoading = {isLoading}
+           />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/class/:classId" element={<ClassPage />} />
           </Route>
+
+          <Route path="*" element={<Navigate to="/" />} />
+          <Route/>
         </Routes>
       </Router>
     </div>
