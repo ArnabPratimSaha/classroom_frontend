@@ -1,6 +1,6 @@
 .class-card__full-div{
     width: 22rem;
-    min-width: 16rem;
+    min-width: 21rem;
     height: 18rem;
     border-radius: 10px;
     background-color: white;
@@ -8,7 +8,6 @@
     filter: drop-shadow(0 0 2px #E0DFDC);
     border: 1px solid #E0DFDC;
     overflow: hidden;
-    cursor: pointer;
     z-index: 1;
     margin: 5px 5px 5px 0;
 }
@@ -81,7 +80,6 @@
     right: 10px;
     top: 10px;
     color: white;
-    z-index: 2;
 }
 
 .class-card__dots-icon-div{
@@ -92,6 +90,7 @@
     justify-content: center;
     align-items: center;
     background-color: transparent;
+    cursor: pointer;
     /* transition: background-color 200ms ease-in-out , transform 100ms ease-in-out; */
 }
 

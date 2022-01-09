@@ -6,6 +6,7 @@ import { MdRssFeed } from "react-icons/md";
 import { BsPen, BsPeople } from "react-icons/bs";
 import Avatar from "../Avatar/Avatar";
 import DropDownDiv from "./components/DropDownDiv";
+import CustomInput from "../CustomInput/CustomInput";
 
 
 const TopNavBar = () => {
@@ -18,6 +19,7 @@ const TopNavBar = () => {
     };
 
     return (
+        <>
         <div className="top-navbar__full-div">
             <div className="top-navbar__logo-div">
                 O-Class
@@ -25,17 +27,17 @@ const TopNavBar = () => {
 
             <div className="top-navbar__navlinks-div">
                 <TopNavbarNavlinks
-                    text={ window.innerWidth > 600 && "Class Feed"}
+                    text="Class Feed"
                     to="/home"
                     icon={<MdRssFeed />}
                 />
                 <TopNavbarNavlinks
-                    text={ window.innerWidth > 600 &&"To-Do"}
+                    text="To-Do"
                     to="/todo"
                     icon={<BsPen />}
                 />
                 <TopNavbarNavlinks
-                    text={ window.innerWidth > 600 &&"People"}
+                    text="People"
                     to="/people"
                     icon={<BsPeople />}
                 />
@@ -66,6 +68,49 @@ const TopNavBar = () => {
                 <Avatar height="3.5rem" width="3.5rem" />
             </div>
         </div>
+        <div className="top-navbar__modal"></div>
+        <div className="top-navbar__create-class__div">
+            <div className="top-navbar__create-class__inner-div">
+                <div className="create-class__carousel-item__div top-navbar__create-class__terms_conditions__div">
+                    <span className="top-navbar__create-class__terms_conditions__header">Terms & Conditions :</span>
+                    <br/>
+                    <br/>
+                    <span className="top-navbar__create-class__terms_conditions">
+                        1. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.
+                    </span>
+                    <br/>
+                    <br/>
+                    <span className="top-navbar__create-class__terms_conditions">
+                        2. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.
+                    </span>
+                    <br/>
+                    <br/>
+                    <span className="top-navbar__create-class__terms_conditions">
+                        3. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.
+                    </span>
+                    <br/>
+                    <br/>
+                    <span className="top-navbar__create-class__terms_conditions">
+                        4. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.
+                    </span>
+                    <br/>
+                    <br/>
+                    <div className="underline"></div>
+                    <br/>
+                    <div className="top-navbar__create-class__terms_conditions__input-div">
+                        <input type = 'checkbox'/>
+                        <label>Accept Terms & Conditions</label>
+                    </div>
+                    <button className="top-navbar__create-class__next-button" >next</button>
+                </div>
+                <div className="create-class__carousel-item__div create-class__info-div">
+                    <CustomInput/>
+                </div>
+                <div className="create-class__carousel-item__div"></div>
+                <div className="create-class__carousel-item__div"></div>
+            </div>
+        </div>
+        </>
     );
 };
 
