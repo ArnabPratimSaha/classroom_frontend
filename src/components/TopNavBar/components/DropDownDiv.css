@@ -5,7 +5,7 @@
     width: 8rem;
     position: absolute;
     right: 0;
-    top: 100%;
+    top: 110%;
     border-radius: 5px;
     /* filter: drop-shadow(0 0 2px #E0DFDC); */
     border: 1px solid #E0DFDC;
@@ -30,7 +30,7 @@
     background-color: white;
     position: absolute;
     right: 7px;
-    top: -7px;
+    top: -9px;
     transform: rotate(45deg);
     z-index: 2;
     cursor: default;

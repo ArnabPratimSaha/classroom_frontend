@@ -6,10 +6,13 @@ import { MdRssFeed } from "react-icons/md";
 import { BsPen, BsPeople } from "react-icons/bs";
 import Avatar from "../Avatar/Avatar";
 import DropDownDiv from "./components/DropDownDiv";
+import CreateClassForm from "./components/CreateClassForm";
 
 
 const TopNavBar = () => {
     const dropDownRef = useRef();
+    const createClassFormRef = useRef();
+    const modalRef = useRef();
 
     const addOrJoinClassButtonClickHandler = () => {
         if (dropDownRef && dropDownRef.current) {
@@ -17,7 +20,28 @@ const TopNavBar = () => {
         }
     };
 
+    const createClassButtonClickHandler = () => {
+        if(modalRef && modalRef.current){
+            modalRef.current.style.display = 'block';
+        }
+
+        if(createClassFormRef && createClassFormRef.current){
+            createClassFormRef.current.style.display = 'block'
+        }
+    }
+
+    const modalClickHandler = () => {
+        if(modalRef && modalRef.current){
+            modalRef.current.style.display = 'none';
+        }
+
+        if(createClassFormRef && createClassFormRef.current){
+            createClassFormRef.current.style.display = 'none'
+        }
+    }
+
     return (
+        <>
         <div className="top-navbar__full-div">
             <div className="top-navbar__logo-div">
                 O-Class
@@ -25,17 +49,17 @@ const TopNavBar = () => {
 
             <div className="top-navbar__navlinks-div">
                 <TopNavbarNavlinks
-                    text={ window.innerWidth > 600 && "Class Feed"}
+                    text="Class Feed"
                     to="/home"
                     icon={<MdRssFeed />}
                 />
                 <TopNavbarNavlinks
-                    text={ window.innerWidth > 600 &&"To-Do"}
+                    text="To-Do"
                     to="/todo"
                     icon={<BsPen />}
                 />
                 <TopNavbarNavlinks
-                    text={ window.innerWidth > 600 &&"People"}
+                    text="People"
                     to="/people"
                     icon={<BsPeople />}
                 />
@@ -60,12 +84,17 @@ const TopNavBar = () => {
                     </div> */}
                     <DropDownDiv
                         ref={dropDownRef}
-                        itemArray={[<span key={1}>Join Class</span>, <span key={2}>Create Class</span>]}
+                        itemArray={[<span key={1}>Join Class</span>, <span onClick={() => {createClassButtonClickHandler()}} key={2}>Create Class</span>]}
                     />
                 </div>
                 <Avatar height="3.5rem" width="3.5rem" />
             </div>
         </div>
+            <div ref = {modalRef} onClick={() => {modalClickHandler()}} className="top-navbar__modal"></div>
+            <CreateClassForm
+                ref = {createClassFormRef}
+            />
+        </>
     );
 };
 

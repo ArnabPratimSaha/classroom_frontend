@@ -1,5 +1,6 @@
 import { memo, useRef } from "react";
 import { BiDotsVerticalRounded } from 'react-icons/bi'
+import { useNavigate } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import DropDownDiv from "../TopNavBar/components/DropDownDiv";
 import "./ClassCard.css";
@@ -10,9 +11,20 @@ const ClassCard = ({
     department,
     className,
     adminName,
+    classId
 }) => {
 
+    const navigate = useNavigate()
     const dropDownDivRef = useRef();
+    const dropDownDivItemArray = [<span onClick={() => {navigate(`/class/${classId}`)}} >Visit</span>,<span onClick={() => {classArchiveHandler()}} >Archive</span> , <span onClick={() => {classUnEnrollHandler()}} >UnEnroll</span> , <span>Report</span>];
+
+    const classUnEnrollHandler = () => {
+
+    }
+
+    const classArchiveHandler = () => {
+        
+    }
 
     return (
         <div className="class-card__full-div">
@@ -55,7 +67,7 @@ const ClassCard = ({
                 </div>
                 <DropDownDiv
                     ref = {dropDownDivRef}
-                    itemArray = {[<span onClick = {() => {console.log('visit')}}>Visit</span>,<span>Archive</span> , <span>UnEnroll</span> , <span>Report</span>]}
+                    itemArray = {dropDownDivItemArray}
                 />
             </div>
         </div>
