@@ -41,8 +41,11 @@ function IntroPageNavbar() {
                 </div>
                 <div className='intropagenavbar__signin-div'>
                     <Buttons
-                        icon = {<AiOutlineLogin/>}
+                        icon = {<AiOutlineLogin style = {{transform : 'translateY(2px)'}} />}
                         text = 'Sign in'
+                        style = {{
+                            width : '10rem'
+                        }}
                         onClick={() => {
                             window.location = 'http://localhost:5000/auth';
                         }}

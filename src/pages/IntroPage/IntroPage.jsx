@@ -58,7 +58,7 @@ function IntroPage() {
                                     }}
                                 />
                                 <Buttons
-                                    icon = {<AiOutlineLogin/>}
+                                    icon = {<AiOutlineLogin style={{transform : 'translateY(2px)'}} />}
                                     text = 'Sign in'
                                     onClick = {() => {
                                         window.location = 'http://localhost:5000/auth';

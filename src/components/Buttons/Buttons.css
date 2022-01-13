@@ -1,5 +1,5 @@
 .buttons__full-div{
-    min-width: 9rem;
+    min-width: fit-content;
     height: 3rem;
     padding: 10px;
     outline: none;
@@ -55,10 +55,10 @@
 
 
 .buttons_text{
-    margin-left: 10px;
-    font-family: 'Comfortaa' , cursive;
-    font-weight: 700;
-    font-size: 1.1rem;
+    margin-left: 5px;
+    font-family: 'Barlow Condensed' , cursive;
+    font-weight: 500;
+    font-size: 1.3rem;
 
 }
 
