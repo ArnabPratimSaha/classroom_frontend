@@ -1,10 +1,10 @@
 import React from 'react'
 import './Buttons.css'
 
-function Buttons({icon,text,style,onClick,className}) {
+function Buttons({icon,text,style,onClick,className,type}) {
 
     return (
-        <button onClick={(e) => { onClick && onClick(e)}} style={style} className={`buttons__full-div ${className && className}`}>
+        <button type = {type && type} onClick={(e) => { onClick && onClick(e)}} style={style} className={`buttons__full-div ${className && className}`}>
             <div className='buttons_icon-div'>
                 {icon}
             </div>
