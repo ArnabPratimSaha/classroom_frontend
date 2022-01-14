@@ -7,16 +7,19 @@ import { BsPen, BsPeople } from "react-icons/bs";
 import Avatar from "../Avatar/Avatar";
 import DropDownDiv from "./components/DropDownDiv";
 import CreateClassForm from "./components/CreateClassForm";
+import JoinClassForm from "./components/JoinClassForm";
 
 
 const TopNavBar = () => {
     const dropDownRef = useRef();
     const createClassFormRef = useRef();
+    const joinClassFormRef = useRef();
     const modalRef = useRef();
 
     const addOrJoinClassButtonClickHandler = () => {
-        if (dropDownRef && dropDownRef.current) {
-            dropDownRef.current.classList.toggle("open-drop-down__div");
+        if (dropDownRef && dropDownRef.current && dropDownRef.current.open) {
+            // dropDownRef.current.classList.toggle("open-drop-down__div");
+            dropDownRef.current.open();
         }
     };
 
@@ -30,7 +33,18 @@ const TopNavBar = () => {
         }
     }
 
+    const joinClassButtonClickHandler = () => {
+        if(modalRef && modalRef.current){
+            modalRef.current.style.display = 'block';
+        }
+
+        if(joinClassFormRef && joinClassFormRef.current){
+            joinClassFormRef.current.style.display = 'block'
+        }
+    }
+
     const modalClickHandler = () => {
+
         if(modalRef && modalRef.current){
             modalRef.current.style.display = 'none';
         }
@@ -38,6 +52,11 @@ const TopNavBar = () => {
         if(createClassFormRef && createClassFormRef.current){
             createClassFormRef.current.style.display = 'none'
         }
+
+        if(joinClassFormRef && joinClassFormRef.current){
+            joinClassFormRef.current.style.display = 'none'
+        }
+
     }
 
     return (
@@ -71,20 +90,9 @@ const TopNavBar = () => {
                         className="top-navbar__join-create-class__icon"
                         onClick={addOrJoinClassButtonClickHandler}
                     />
-                    {/* <div
-                        ref={dropDownRef}
-                        className="top-navbar__join-create-class__drop-down__div"
-                    >
-                        <div className="top-navbar__join-create-class__drop-down__items">
-                            Join Class
-                        </div>
-                        <div className="top-navbar__join-create-class__drop-down__items">
-                            Create Class
-                        </div>
-                    </div> */}
                     <DropDownDiv
                         ref={dropDownRef}
-                        itemArray={[<span key={1}>Join Class</span>, <span onClick={() => {createClassButtonClickHandler()}} key={2}>Create Class</span>]}
+                        itemArray={[<span onClick={() => {joinClassButtonClickHandler()}} key={1}>Join Class</span>, <span onClick={() => {createClassButtonClickHandler()}} key={2}>Create Class</span>]}
                     />
                 </div>
                 <Avatar height="3.5rem" width="3.5rem" />
@@ -93,6 +101,9 @@ const TopNavBar = () => {
             <div ref = {modalRef} onClick={() => {modalClickHandler()}} className="top-navbar__modal"></div>
             <CreateClassForm
                 ref = {createClassFormRef}
+            />
+            <JoinClassForm
+                ref = {joinClassFormRef}
             />
         </>
     );

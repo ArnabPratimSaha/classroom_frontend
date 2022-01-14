@@ -59,8 +59,8 @@ const ClassCard = ({
             </div>
             <div className="class-card__dots-div">
                 <div onClick = {() => {
-                    if(dropDownDivRef && dropDownDivRef.current){
-                        dropDownDivRef.current.classList.toggle('open-drop-down__div');
+                    if(dropDownDivRef && dropDownDivRef.current && dropDownDivRef.current.open){
+                        dropDownDivRef.current.open();
                     }
                 }} className="class-card__dots-icon-div">
                     <BiDotsVerticalRounded/>
