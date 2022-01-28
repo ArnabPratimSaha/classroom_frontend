@@ -1,4 +1,4 @@
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import TopNavbarNavlinks from "./components/TopNavbarNavlinks";
 import "./TopNavBar.css";
 import { IoAddCircleOutline } from "react-icons/io5";
@@ -8,6 +8,8 @@ import Avatar from "../Avatar/Avatar";
 import DropDownDiv from "./components/DropDownDiv";
 import CreateClassForm from "./components/CreateClassForm";
 import JoinClassForm from "./components/JoinClassForm";
+import { useSelector } from "react-redux";
+import { useMatch } from "react-router-dom";
 
 
 const TopNavBar = () => {
@@ -15,6 +17,25 @@ const TopNavBar = () => {
     const createClassFormRef = useRef();
     const joinClassFormRef = useRef();
     const modalRef = useRef();
+    const isClassPage = useSelector(state => state.isClassPage)
+
+    const classFeedMatch = useMatch('/class/:classId')
+    const classTodoMatch = useMatch('/class-todo/:classId')
+    const classPeopleMatch = useMatch('/class-people/:classId')
+
+    const [classId , setClassId] = useState(null)
+
+    useEffect(() => {
+
+        if(classFeedMatch && classFeedMatch.params && classFeedMatch.params.classId){
+            setClassId(classFeedMatch.params.classId)
+        }else if(classTodoMatch && classTodoMatch.params && classTodoMatch.params.classId){
+            setClassId(classTodoMatch.params.classId)
+        }else if(classPeopleMatch && classPeopleMatch.params && classPeopleMatch.params.classId){
+            setClassId(classPeopleMatch.params.classId)
+        }
+
+    },[classFeedMatch , classTodoMatch , classPeopleMatch])
 
     const addOrJoinClassButtonClickHandler = () => {
         if (dropDownRef && dropDownRef.current && dropDownRef.current.open) {
@@ -66,23 +87,23 @@ const TopNavBar = () => {
                 O-Class
             </div>
 
-            <div className="top-navbar__navlinks-div">
+            {isClassPage && <div className="top-navbar__navlinks-div">
                 <TopNavbarNavlinks
                     text="Class Feed"
-                    to="/home"
+                    to={`/class/${classId && classId}`}
                     icon={<MdRssFeed />}
                 />
                 <TopNavbarNavlinks
                     text="To-Do"
-                    to="/todo"
+                    to={`/class-todo/${classId && classId}`}
                     icon={<BsPen />}
                 />
                 <TopNavbarNavlinks
                     text="People"
-                    to="/people"
+                    to={`/class-people/${classId && classId}`}
                     icon={<BsPeople />}
                 />
-            </div>
+            </div>}
 
             <div className="top-navbar__right-div">
                 <div className="top-navbar__join-create-class__div">

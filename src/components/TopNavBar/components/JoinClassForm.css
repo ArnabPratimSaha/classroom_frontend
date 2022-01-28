@@ -12,6 +12,7 @@
     display: none;
     padding: 5px 15px 10px 15px;
     font-family: 'Barlow Condensed';
+    max-width: 100vw;
 }
 
 .join-class__header{
