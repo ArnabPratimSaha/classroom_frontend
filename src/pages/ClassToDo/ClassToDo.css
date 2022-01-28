@@ -1,0 +1,27 @@
+.class__to-do__full-div{
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    background-color: #F3F2EF;
+}
+
+.class__to-do__inner-div{
+    width: 100%;
+    height: 100%;
+    padding: 5rem 2px 1rem 5rem;
+}
+
+.class__to-do__nav-buttons{
+    background: none;
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    font-family: 'Barlow Condensed';
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #bdbebe;
+    margin-right: 10px;
+}
