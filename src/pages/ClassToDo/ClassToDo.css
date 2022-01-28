@@ -25,3 +25,9 @@
     color: #bdbebe;
     margin-right: 10px;
 }
+
+@media(max-width : 600px){
+    .class__to-do__inner-div{
+        padding-left: 2px;
+    }
+}

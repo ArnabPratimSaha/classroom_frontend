@@ -1,3 +1,35 @@
 .class-people-card__full-div{
-    
+    width: 100%;
+    background-color: white;
+    border: 1px solid #E0DFDC;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+}
+
+.class-people-card__avatar-div{
+    margin-right: 10px;
+    display: inline-flex;
+}
+
+.class-people-card__name{
+    font-family: 'Barlow Condensed';
+    font-size: 1.3rem;
+    color: #585858;
+    font-weight: 500;
+}
+
+.class-people-card__roll-no{
+    font-family: 'Barlow Condensed';
+    font-size: 1rem;
+    color: #818080;
+}
+
+.class-people-card__dots-div{
+    margin-left: auto;
+    color: #818080;
+    font-size: 1.1rem;
 }
