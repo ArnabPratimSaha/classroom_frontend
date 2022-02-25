@@ -6,6 +6,7 @@ import { AiOutlineHome, AiOutlineCalendar } from "react-icons/ai";
 import { ImFilesEmpty } from "react-icons/im";
 import { SiGooglescholar } from "react-icons/si";
 import { BsCaretDown } from "react-icons/bs";
+import { Outlet } from "react-router-dom";
 
 const ClassAvatar = ({class_name , style}) => {
     return(
@@ -28,15 +29,12 @@ const LeftNavbar = () => {
     }
 
     return (
-        <div style = {{width : isOpened && '17rem' , left : isOpened && '0'}} className="leftnavbar__fulldiv">
-
-                <div style = {{left : isOpened && '8px'}} onClick = {() => {hamburgerButtonClickHandler()}} className='leftnavbar__burger-button__div'>
-                    <div ref = {burgerButtonRef} className='leftnavbar__burger-button'></div>
-                </div>
-
+        <div style={{ width: isOpened && '17rem', left: isOpened && '0' }} className="leftnavbar__fulldiv">
+            <div style={{ left: isOpened && '8px' }} onClick={() => { hamburgerButtonClickHandler() }} className='leftnavbar__burger-button__div'>
+                <div ref={burgerButtonRef} className='leftnavbar__burger-button'></div>
+            </div>
             <div className="leftnavbar__navlinks__outer-div">
                 <div className="leftnavbar__navlinks__inner-div">
-
                     <NavLinks
                         icon={<AiOutlineHome />}
                         text="Home"

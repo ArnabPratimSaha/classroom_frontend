@@ -1,19 +1,22 @@
 import './DropDownDiv.css'
-import { forwardRef, memo, useImperativeHandle, useRef } from 'react';
+import { forwardRef, memo, useImperativeHandle, useRef ,useState} from 'react';
 
 const DropDownDiv = ({ itemArray } , ref) => {
 
     const reference = useRef();
-
-    useImperativeHandle(ref , () => ({
-        open : () => {
-            if(reference && reference.current && !reference.current.classList.contains('open-drop-down__div')){
+    const [isOpen,setIsOpen]=useState(false);
+    useImperativeHandle(ref, () => ({
+        isOpen: isOpen,
+        open: () => {
+            if (reference && reference.current && !reference.current.classList.contains('open-drop-down__div')) {
                 reference.current.classList.add('open-drop-down__div')
+                setIsOpen(true);
             }
         },
-        close : () => {
-            if(reference && reference.current && reference.current.classList.contains('open-drop-down__div')){
-                reference.current.classList.remove('open-drop-down__div')
+        close: () => {
+            if (reference && reference.current && reference.current.classList.contains('open-drop-down__div')) {
+                reference.current.classList.remove('open-drop-down__div');
+                setIsOpen(false);
             }
         }
     }))

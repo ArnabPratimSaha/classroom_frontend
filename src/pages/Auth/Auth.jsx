@@ -16,8 +16,8 @@ function Auth() {
         if(id && accessToken && refreshToken){
 
             Cookies.set('id' , id , {expires : 365})
-            Cookies.set('accessToken' , accessToken , {expires : 365})
-            Cookies.set('refreshToken' , refreshToken , {expires : 365})
+            Cookies.set('accesstoken' , accessToken , {expires : 365})
+            Cookies.set('refreshtoken' , refreshToken , {expires : 365})
 
             window.location = '/home';
 
