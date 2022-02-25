@@ -19,8 +19,8 @@
     width: calc(100% - 6rem);
     padding: 10px;
     padding-right: 20px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
 }
 
 .home-page__enrolled-classes__heading-div{
@@ -49,11 +49,23 @@
     display: inline-block;
     font-size: 3rem;
 }
-
-@media(max-width : 600px){
-
+@media(max-width : 1400px){
+    .home-page__enrolled-classes__div{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media(max-width : 1000px){
+    .home-page__enrolled-classes__div{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media(max-width : 700px){
+    
     .home-page__classes__div{
         margin-left: 0;
     }
-
+    .home-page__enrolled-classes__div{
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
 }

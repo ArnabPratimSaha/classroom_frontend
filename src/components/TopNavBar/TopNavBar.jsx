@@ -10,7 +10,7 @@ import CreateClassForm from "./components/CreateClassForm";
 import JoinClassForm from "./components/JoinClassForm";
 import { useSelector } from "react-redux";
 import { useMatch } from "react-router-dom";
-
+import { Outlet, Link } from "react-router-dom";
 
 const TopNavBar = () => {
     const dropDownRef = useRef();
@@ -126,6 +126,7 @@ const TopNavBar = () => {
             <JoinClassForm
                 ref = {joinClassFormRef}
             />
+            <Outlet/>
         </>
     );
 };

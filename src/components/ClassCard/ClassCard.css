@@ -1,6 +1,5 @@
 .class-card__full-div{
-    width: 22rem;
-    min-width: 21rem;
+    min-width: 15rem;
     height: 18rem;
     border-radius: 10px;
     background-color: white;
@@ -93,7 +92,10 @@
     cursor: pointer;
     /* transition: background-color 200ms ease-in-out , transform 100ms ease-in-out; */
 }
-
+.class-card__full-div,.class-card__lower-div
+{
+    cursor: pointer;
+}
 /* .class-card__dots-div:hover{
     background-color: rgba(233, 233, 233, 0.315);
 }

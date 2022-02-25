@@ -4,7 +4,6 @@ import './Calendar.css'
 const Calendar = () => {
     return (
         <div>
-            <LeftNavbar/>
             This is Calendar Page
         </div>
     )
