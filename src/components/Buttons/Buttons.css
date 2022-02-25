@@ -1,5 +1,5 @@
 .buttons__full-div{
-    min-width: 9rem;
+    min-width: fit-content;
     height: 3rem;
     padding: 10px;
     outline: none;
@@ -15,7 +15,7 @@
     cursor: pointer;
     border-radius: 2px;
     transition: transform 200ms ease-in-out;
-    box-shadow: 2px 2px 6px #cecece;
+    box-shadow: 1px 1px 3px #cecece;
     border: 1px solid rgb(75,83,188);
 }
 
@@ -55,16 +55,17 @@
 
 
 .buttons_text{
-    margin-left: 10px;
-    font-family: 'Comfortaa' , cursive;
-    font-weight: 700;
-    font-size: 1.1rem;
+    margin-left: 5px;
+    font-family: 'Barlow Condensed' , cursive;
+    font-weight: 500;
+    font-size: 1.3rem;
 
 }
 
 @media(max-width : 500px){
 
     .buttons__full-div{
+        transform-origin: left;
         transform: scale(0.8);
     }
 

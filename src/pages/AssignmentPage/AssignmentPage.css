@@ -1,0 +1,177 @@
+.assignment-page__full-div{
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    background-color: #F3F2EF;
+}
+
+.assignment-page__inner-div{
+    padding: 5rem 2px 1rem 5rem;
+    width: 100%;
+    height: 100%;
+    font-family: 'Barlow Condensed';
+    /* background-color: red; */
+}
+
+.assignment-page__modal{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    background-color: rgba(255 , 255 , 255 , 0.3);
+    backdrop-filter: blur(2px);
+    display: none;
+    overflow: hidden;
+}
+
+.assignment-page__prompt-div{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50% , -50%);
+    z-index: 21;
+    display: none;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #fecece;
+    width: fit-content;
+}
+
+.assignment-page__prompt__text{
+    display: block;
+    text-align: left;
+    font-family: 'Barlow Condensed';
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #404040;
+}
+
+.assignment-page__assignment-title{
+    font-family: 'Barlow Condensed';
+    font-weight: 500;
+    font-size: 2rem;
+    color: orange;
+}
+
+.assignment-page__description-div{
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.assignment-page__description-text{
+    font-family: 'Barlow Condensed';
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #404040;
+    line-height: 1.5rem;
+    word-spacing: 2px;
+    letter-spacing: 0.7px;
+}
+
+.assignment-page__submission-details-title{
+    font-family: 'Barlow Condensed';
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: #404040;
+    margin-top: 20px;
+    display: block;
+}
+
+.assignment-page__submission-details__div{
+    background-color: white;
+    padding: 10px;
+    margin: 5px 10px 0 0;
+    border-radius: 5px;
+}
+
+.assignment__is-completed{
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.assignment-page__assignment-submission-time{
+    margin-top: 2px;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    color: #818080;
+    margin-left: 25px;
+}
+
+.assignment-page__my-submitted-files-title{
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #1967D2;
+    display: flex;
+    align-items: center;
+}
+
+.assignment-page__my-submission-div{
+    margin: 10px 0 0 25px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+}
+
+.assignment-page__my-submission-div:hover{
+    border-bottom-color: #FB3449;
+}
+
+.assignment-page__submitted-file__type-icon{
+    margin-right: 5px;
+}
+
+.assignment-page__submitted-file__name{
+    
+}
+
+.assignment-page__new-submission-div{
+    width: calc(100% - 10px);
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #f2f0fe;
+    text-align: center;
+    padding: 20px 10px;
+    height: fit-content;
+    margin-right: 10px;
+}
+
+.assignment-page__new-files-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.assignment-page__new-each-file-div{
+    height: fit-content;
+    width: fit-content;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #FB3449;
+}
+
+.assignment-page__pdf-viewer{
+    width: 100%;
+    height: 50rem;
+}
+
+@media(max-width : 600px){
+    .assignment-page__inner-div{
+        padding-left: 10px;
+    }
+}

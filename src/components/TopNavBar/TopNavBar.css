@@ -6,11 +6,12 @@
     left: 0;
     top: 0;
     z-index: 10;
-    box-shadow: 0 2px 4px #E0DFDC;
+    /* box-shadow: 0 2px 4px #E0DFDC; */
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     padding-left: 4rem;
+    border-bottom: 1px solid #CED0D4;
 }
 
 .top-navbar__logo-div{

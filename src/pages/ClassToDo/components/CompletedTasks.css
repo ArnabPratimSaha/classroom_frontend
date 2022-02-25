@@ -1,0 +1,29 @@
+.each-completed-task__full-div{
+    width: 100%;
+    max-width: 40rem;
+    background-color: white;
+    border: 1px solid #E0DFDC;
+    border-radius: 5px;
+    color: #818080;
+    font-family: 'Barlow Condensed';
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.each-completed-task__title{
+    color: #404040;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.each-completed-task__is-completed{
+    margin-top: 10px;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.each-completed-task__icon{
+    margin-right: 10px;
+}

@@ -9,7 +9,7 @@ const defaultActiveStyle = {
 const TopNavbarNavlinks = ({text , to , icon , activeStyle}) => {
     
     return (
-        <NavLink style={({isActive}) => isActive ? (activeStyle ? activeStyle : defaultActiveStyle) : undefined} to = {to && to} className='top-navbar__navlinks__full-div'>
+        <NavLink style={({isActive}) => isActive ? (activeStyle ? activeStyle : defaultActiveStyle) : undefined} to = {to} className='top-navbar__navlinks__full-div'>
             <div className='top-navbar__navlinks__icon-div'>
                 {icon && icon}
             </div>

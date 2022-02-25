@@ -17,6 +17,9 @@ import ProtectedRoutes from "./pages/ProtectedRoutes/ProtectedRoutes";
 import ClassPage from "./pages/ClassPage/ClassPage";
 import TopNavBar from "./components/TopNavBar/TopNavBar";
 import LeftNavbar from "./components/LeftNavbar/LeftNavbar";
+import ClassToDo from "./pages/ClassToDo/ClassToDo";
+import ClassPeople from "./pages/ClassPeople/ClassPeople";
+import AssignmentPage from "./pages/AssignmentPage/AssignmentPage";
 
 const unprotectedRoutes = new Set('/','/signup','/auth','/error');
 
@@ -43,6 +46,9 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/class/:classId" element={<ClassPage />} />
+              <Route path="/class-todo/:classId" element={<ClassToDo />} />
+              <Route path="/class-people/:classId" element={<ClassPeople />} />
+              <Route path="/assignment/:assignmentId" element={<AssignmentPage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" />} />
