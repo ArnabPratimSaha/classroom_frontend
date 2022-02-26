@@ -9,9 +9,16 @@ const useAuth = () => {
   const [id,setId]=useState(Cookies.get('id'));
   const [accesstoken,setAccesstoken]=useState(Cookies.get("accesstoken"));
   const [refreshtoken,setRefreshtoken]=useState(Cookies.get("refreshtoken"));
+  const [name,setName]=useState();
+  const [image,setImage]=useState();
+  const [userInfo,setUserInfo]=useState({});
+  
   const updateToken = (token) => {
-    Cookies.set('accessToken', token);
+    setAccesstoken(token);
   }
+  useEffect(()=>{
+    Cookies.set('accesstoken', accesstoken, {expires : 365});
+  },[accesstoken])
   useEffect(() => {
     const func = async () => {
       if (!accesstoken || !refreshtoken || !id) {
@@ -33,8 +40,13 @@ const useAuth = () => {
         if (res.status === 200) {
           setIsAuth(true);
           setIsLoading(false);
-          const data=res.data;
-          if(res.data.accesstoken){
+          const data = res.data;
+          if (data && data.user) {
+            setName(data.user.name);
+            setImage(data.user.avatar);
+            setUserInfo(data.user.userInfo)
+          }
+          if (res.data.accesstoken) {
             setAccesstoken(res.data.accesstoken);
           }
           return;
@@ -59,14 +71,14 @@ const useAuth = () => {
     window.location=`${process.env.REACT_APP_API}/auth`
   }
   const logOut =async () => {
-    if (!accesstoken || !refreshtoken || !id) {
-      setIsAuth(false)
-      setIsLoading(false)
-      return;
-    }
     try {
+      if (!accesstoken || !refreshtoken || !id) {
+        setIsAuth(false)
+        setIsLoading(false)
+        return false;
+      }
       const res = await axios({
-        method: "get",
+        method: "delete",
         url: `${process.env.REACT_APP_API}/user/logout`,
         headers: {
           id,
@@ -83,17 +95,18 @@ const useAuth = () => {
         setId(null);
         setAccesstoken(null);
         setRefreshtoken(null);
+        return true;
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setIsLoading(false)
         window.location = '/error'
-        return;
+        return false;
       }
     }
   }
 
-  return [id, accesstoken, refreshtoken, isLoading, login, logOut, updateToken]
+  return [id, name, image, userInfo, accesstoken, refreshtoken, isLoading, login, logOut, updateToken]
 }
 
 export default useAuth

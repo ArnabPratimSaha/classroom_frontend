@@ -15,7 +15,9 @@
     overflow-x: hidden;
     display: none;
     max-width: 100vw;
+    /* background-color: #3d87ff; */
 }
+
 
 .top-navbar__create-class__div::-webkit-scrollbar{
     width: 0;
@@ -85,7 +87,110 @@
     font-family: 'Barlow Condensed';
     overflow-y: scroll; */
 }
+.create-class__info-div_attributes
+{
+    padding: 5px;
+    background-color: #eeeeee;
+}
+.info-div-top{
+    background-color: #dfdfdf;
+    padding-bottom: 10px;
+}
+.info-div-top span
+{
+    color: #008bb9;
+}
+.info-div_attributes-field-form
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px 0;
+}
+.info-div_attributes-field-form input
+{
+    border: 1px solid #474747;
+    border-radius: 5px;
+    font-family: 'Barlow Condensed';
+    padding:5px ;
+    margin-right: 2rem;
+}
+.info-div_attributes-field-form input:focus
+{
+    outline: none;
+}
+.info-div_attributes-field-form__button
+{
+    background-color: #44cf44;
+    padding: 5px 10px;
+    border: 1px solid #358b35;
+    border-radius: 5px;
+    font-family: 'Barlow Condensed';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    box-sizing: border-box;
 
+
+}
+.info-div_attributes-field-form__button:hover
+{
+    filter: drop-shadow(0 0 2px #666);
+}
+.info-div_attributes-field-result
+{
+    background-color: #dfdfdf;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.field-result-attributes
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+.field-result-attributes:hover{
+    background-color:#fff !important;
+}
+.field-result-attributes-buttons
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+.field-result-attributes-buttons button
+{
+    border: none;
+    padding: 0;
+    font-size: 1.2rem;
+    background-color: transparent;
+    display: flex;
+    color: #666;
+    justify-content: center;
+    align-items: center;
+}
+.field-result-attributes-buttons button:focus
+{
+    outline: none;
+}
+.attributes-icons-arrow-up:hover
+{
+    color: #44cf44;
+}
+.attributes-icons-close:hover{
+    color: #ff5858;
+}
+.field-result-attributes-icons
+{
+    cursor: pointer;
+}
 .create-class__cover-pic__preview-div{
     width: 100%;
     min-height: 10rem;

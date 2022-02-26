@@ -1,18 +1,18 @@
 import {useState} from 'react';
 import axios from 'axios';
 const useRequest=(updateToken)=>{
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState(false);
 
     const makeRequst = async(url,option)=> {
         setLoading(true);
         try {
             const res=await axios({
                 url:url,
-                method:option?.method||'GET',
-                data:option?.body,
-                cancelToken:option?.cancelTokenSource?.token,
-                params:option?.query,
-                headers:option?.headers
+                method:option.method||'GET',
+                data:option.body,
+                cancelToken:option.token,
+                params:option.query,
+                headers:option.headers
             })
             setLoading(false);
             const response={

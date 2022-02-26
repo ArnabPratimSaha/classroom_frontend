@@ -4,8 +4,8 @@ import IntroPageNavbar from '../../components/IntroPageNavbar/IntroPageNavbar';
 import LottiAnimation from '../../components/LottiAnimation/LottiAnimation';
 import intropageLotti1 from '../../images/80356-online-learning.json'
 
-import {AiOutlineLogin} from 'react-icons/ai'
-import {IoPersonAddOutline} from 'react-icons/io5'
+import { AiOutlineLogin } from 'react-icons/ai'
+import { ImHome } from 'react-icons/im'
 
 import AssignmentLotti from '../../images/assignmentsLotti.json'
 import OnlineClassroomLotti from '../../images/onlineClassroom.json'
@@ -18,9 +18,10 @@ import AssignmentDescriptionLotti from '../../images/assignmentDescriptionLotti.
 import './IntroPage.css';
 import Features from './components/Features';
 import FeatureDescription from './components/FeatureDescription';
+import { useNavigate } from 'react-router-dom';
 
 function IntroPage() {
-
+    let navigate = useNavigate();
 
     return (
         <div className='intropage__full-div'>
@@ -50,12 +51,10 @@ function IntroPage() {
                             </div>
                             <div className='intropage__upper-div__right-div__buttons-div'>
                                 <Buttons
-                                    icon = {<IoPersonAddOutline/>}
-                                    text = 'Get Started'
+                                    icon = {<ImHome/>}
+                                    text = 'Home'
                                     className='intropage__button__signup'
-                                    onClick = {() => {
-                                        window.location = 'http://localhost:5000/auth';
-                                    }}
+                                    onClick = {() => navigate('/home')}
                                 />
                                 <Buttons
                                     icon = {<AiOutlineLogin style={{transform : 'translateY(2px)'}} />}
