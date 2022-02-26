@@ -1,7 +1,9 @@
 import { memo, useEffect, useRef, useState } from "react";
 import TopNavbarNavlinks from "./components/TopNavbarNavlinks";
 import "./TopNavBar.css";
-import { IoAddCircleOutline } from "react-icons/io5";
+import { IoAddCircleOutline,IoRemoveCircleOutline } from "react-icons/io5";
+import { AiOutlineLogout,AiFillSetting } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
 import { MdRssFeed } from "react-icons/md";
 import { BsPen, BsPeople } from "react-icons/bs";
 import Avatar from "../Avatar/Avatar";
@@ -9,22 +11,28 @@ import DropDownDiv from "./components/DropDownDiv";
 import CreateClassForm from "./components/CreateClassForm";
 import JoinClassForm from "./components/JoinClassForm";
 import { useSelector } from "react-redux";
-import { useMatch } from "react-router-dom";
-import { Outlet, Link } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
+import useRequest from '../../Hooks/useRequest'
+const noPic = 'https://cdn.imgbin.com/14/14/14/imgbin-avatar-beard-icon-bearded-uncle-u7a1CeQFm4JCA4v8a97sbEgsa.jpg'
 
-const TopNavBar = () => {
+const TopNavBar = ({ id,name,image, accesstoken, refreshtoken, logOut, updateToken }) => {
+    const [makeRequst, loading] = useRequest(updateToken);
     const dropDownRef = useRef();
     const createClassFormRef = useRef();
     const joinClassFormRef = useRef();
     const modalRef = useRef();
+    const usercard = useRef();
     const isClassPage = useSelector(state => state.isClassPage)
 
     const classFeedMatch = useMatch('/class/:classId')
     const classTodoMatch = useMatch('/class-todo/:classId')
     const classPeopleMatch = useMatch('/class-people/:classId')
 
-    const [classId , setClassId] = useState(null)
-
+    
+    const [classId , setClassId] = useState(null);
+    const [isUserCardVisible,setIsUserCardVisible]=useState(false);
+    const [isClassButtonClick,setIsClassButtonClick]=useState(false);
+    const navigate=useNavigate();
     useEffect(() => {
 
         if(classFeedMatch && classFeedMatch.params && classFeedMatch.params.classId){
@@ -36,13 +44,13 @@ const TopNavBar = () => {
         }
 
     },[classFeedMatch , classTodoMatch , classPeopleMatch])
-
-    const addOrJoinClassButtonClickHandler = () => {
-        if (dropDownRef && dropDownRef.current && dropDownRef.current.open) {
-            // dropDownRef.current.classList.toggle("open-drop-down__div");
+    useEffect(()=>{
+        if(isClassButtonClick && dropDownRef.current && dropDownRef.current.open){
             dropDownRef.current.open();
+        }else if(!isClassButtonClick && dropDownRef.current && dropDownRef.current.close){
+            dropDownRef.current.close();
         }
-    };
+    },[isClassButtonClick])
 
     const createClassButtonClickHandler = () => {
         if(modalRef && modalRef.current){
@@ -79,7 +87,13 @@ const TopNavBar = () => {
         }
 
     }
-
+    const handleLogout=async()=>{
+        try {
+            (await logOut())&&navigate('/')
+        } catch (error) {
+            
+        }
+    }
     return (
         <>
         <div className="top-navbar__full-div">
@@ -106,17 +120,37 @@ const TopNavBar = () => {
             </div>}
 
             <div className="top-navbar__right-div">
-                <div className="top-navbar__join-create-class__div">
-                    <IoAddCircleOutline
+                <button className="top-navbar__join-create-class__div" onBlur={()=>setIsClassButtonClick(false)}>
+                    {!isClassButtonClick?<IoAddCircleOutline
                         className="top-navbar__join-create-class__icon"
-                        onClick={addOrJoinClassButtonClickHandler}
-                    />
+                        onClick={()=>setIsClassButtonClick(s=>!s)}
+                    />:
+                    <IoRemoveCircleOutline
+                        className="top-navbar__join-create-class__icon"
+                        onClick={()=>setIsClassButtonClick(s=>!s)}
+                    />}
                     <DropDownDiv
                         ref={dropDownRef}
                         itemArray={[<span onClick={() => {joinClassButtonClickHandler()}} key={1}>Join Class</span>, <span onClick={() => {createClassButtonClickHandler()}} key={2}>Create Class</span>]}
                     />
-                </div>
-                <Avatar height="3.5rem" width="3.5rem" />
+                </button>
+                <button className="top-navbar__user-info" onBlur={()=>{setIsUserCardVisible(false)}}>
+                    <img  className="top-navbar__user-info_image" src={image||noPic} alt="img"  onClick={()=>{setIsUserCardVisible(s=>!s)}} />
+                    <div ref={usercard} className={`top-navbar__user-card ${!isUserCardVisible && 'user-card__hidden'}`} >
+                        <div className="top-navbar__user-card_profile" onClick={()=>{ setIsUserCardVisible(false);}}>
+                            <CgProfile/>
+                            Profile
+                        </div>
+                        <div className="top-navbar__user-card_settings" onClick={()=>{ setIsUserCardVisible(false);}}>
+                            <AiFillSetting/>
+                            settings
+                        </div>
+                        <div className="top-navbar__user-card_logout" onClick={()=>{ setIsUserCardVisible(false); handleLogout()}}>
+                            <AiOutlineLogout/>
+                            logout
+                        </div>
+                    </div>
+                </button>
             </div>
         </div>
             <div ref = {modalRef} onClick={() => {modalClickHandler()}} className="top-navbar__modal"></div>
@@ -126,7 +160,6 @@ const TopNavBar = () => {
             <JoinClassForm
                 ref = {joinClassFormRef}
             />
-            <Outlet/>
         </>
     );
 };

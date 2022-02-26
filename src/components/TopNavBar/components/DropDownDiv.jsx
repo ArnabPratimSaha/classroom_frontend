@@ -25,7 +25,6 @@ const DropDownDiv = ({ itemArray } , ref) => {
         <div ref = {reference}  className="drop-down__div">
             {itemArray &&
                 itemArray.map((eachItem,index) => {
-
                     return (
                     <>
                         <div onClick = {() => {
