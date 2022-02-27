@@ -7,17 +7,16 @@ import { IoIosArrowRoundBack } from 'react-icons/io'
 import { AiOutlineCheck,AiOutlineCloseCircle } from 'react-icons/ai';
 import { VscDiffAdded } from 'react-icons/vsc';
 import { BsArrowUpCircle } from 'react-icons/bs';
+import useRequest from "../../../Hooks/useRequest";
+import axios from "axios";
 
-
-const CreateClassForm = ({ }, ref) => {
-
+const CreateClassForm = ({  id, accesstoken, refreshtoken ,updateToken  }, ref) => {
+    const [makeRequst, loading] = useRequest(updateToken);
     const imagePreviewRef = useRef();
     const pickFileRef = useRef();
     const checkBoxRef = useRef();
     const classNameRef = useRef();
     const classDescriptionRef = useRef();
-    const departmentRef = useRef();
-    const sectionRef = useRef();
 
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -81,64 +80,58 @@ const CreateClassForm = ({ }, ref) => {
     }
 
     const formOnSubmitHandler = async () => {
-
-        const isChecked = checkBoxRef.current.isChecked;
         const className = classNameRef.current.value;
         const classDescription = classDescriptionRef.current.value;
-        const department = departmentRef.current.value;
-        const section = sectionRef.current.value;
-        const coverImage = preview;
 
-        if (!isChecked) {
+        if (!checked)return;
+        if (!className || className.length === 0 ) {
             // error occurred
             return;
         }
 
-        if (!className || className.length === 0 ||
-            !classDescription || classDescription.length === 0 ) {
-            // error occurred
-            return;
-        }
-
+        var length=fieldAttributes.length;
         const formData = new FormData();
-        formData.append('className', className)
-        formData.append('classCode', classDescription)
-        coverImage && formData.append('coverImage', coverImage);
-
-        // axios request to backend 
-
-
-
-
-        console.log('Form on submit');
+        formData.append('files', file);
+        formData.append('name', className);
+        formData.append('description', classDescription);
+        formData.append('fields', JSON.stringify(fieldAttributes.map((f)=>[f,length--])));
+        // axios request to backend
+        const headers={
+            id,accesstoken,refreshtoken,"Content-Type": "multipart/form-data" 
+        }
+        try {
+            const res=await makeRequst(`${process.env.REACT_APP_API}/class/create`,{
+                headers,
+                method:'post',
+                body:formData
+            })
+            console.log(res.data);
+        } catch (error) {}
     }
     const handleFormAttributeButtonClicked=()=>{
         if(fieldInputValue.length===0)return;
         setFieldAttributes(s=>[...s,fieldInputValue])
         setFiledInputValue('');
     }
-    useEffect(()=>{
-        console.log(fieldAttributes);
-    },[fieldAttributes])
     return (
-        <div ref={ref} className="top-navbar__create-class__div">
-            <form encType="multipart/form-data" onSubmit={(e) => { formOnSubmitHandler(e) }} className="top-navbar__create-class__inner-div">
+        <div ref={ref} className="top-navbar__create-class__div" onFocus={(e)=>e.preventDefault()}>
+            <div className="top-navbar__create-class__inner-div">
                 <div id='create-class__carousel-item__div1' className="create-class__carousel-item__div top-navbar__create-class__terms_conditions__div">
                     <span className="top-navbar__create-class__terms_conditions__header">Terms & Conditions :</span>
                     <br />
                     <br />
                     <span className="top-navbar__create-class__terms_conditions">
-                        1. Contrary to popular belief, Lorem Ipsum is not simply random text.
+                        1. Contrary to popular belief, Lorem Ipsum is not simply random text
                     </span>
                     <br />
                     <br />
                     <span className="top-navbar__create-class__terms_conditions">
-                        2. Contrary to popular belief, Lorem Ipsum is not simply random
+                        2. Contrary to popular belief, Lorem Ipsum is not simply
                     </span>
                     <br />
                     <br />
                     <span className="top-navbar__create-class__terms_conditions">
-                        3. Contrary to popular belief, Lorem Ipsum is not simply random text. I
+                        3. Contrary to popular belief, Lorem Ipsum is not simply random text. Iawawd awd awd awd awd awdaw awdawdawd awd awd awd
                     </span>
                     <br />
                     <br />
@@ -219,7 +212,7 @@ const CreateClassForm = ({ }, ref) => {
                             </button>
                         </div>
                         <div className="info-div_attributes-field-result">
-                            {fieldAttributes.map((attr,index)=><div className="field-result-attributes" style={{background:index%2===0?'#e4e4e4':'#cccccc'}}>
+                            {fieldAttributes.map((attr,index)=><div key={index} className="field-result-attributes" style={{background:index%2===0?'#e4e4e4':'#cccccc'}}>
                                 {attr}
                                 <div className="field-result-attributes-buttons">
                                     {index!==0 &&<button type="button"><BsArrowUpCircle className="field-result-attributes-icons attributes-icons-arrow-up" 
@@ -234,7 +227,7 @@ const CreateClassForm = ({ }, ref) => {
                                             })  
                                         }}    
                                     /></button>}
-                                    <button type="button"><AiOutlineCloseCircle className="field-result-attributes-icons attributes-icons-close" onClick={()=>{
+                                    <button type="button" ><AiOutlineCloseCircle className="field-result-attributes-icons attributes-icons-close" onClick={()=>{
                                         setFieldAttributes(s=>s.filter((v,i)=>i!==index))
                                     }}/></button>
                                 </div>
@@ -280,17 +273,17 @@ const CreateClassForm = ({ }, ref) => {
                     <div onClick={() => { pickFileRef && pickFileRef.current && pickFileRef.current.click() }} className="create-class__cover-pic__preview-div">
                         {preview && <img alt='cover' src={preview} ref={imagePreviewRef} className="create-class__cover-preview" />}
                     </div>
-                    <input onChange={(e) => { setFile(e.target.files[0]) }} style={{ display: 'none' }} ref={pickFileRef} type='file' />
+                    <input onChange={(e) => { setFile(e.target.files[0]) }} style={{ display: 'none' }} ref={pickFileRef} type='file' accept="image/png, image/jpg, image/jpeg" />
                     <div className="create-class__info-button__div">
                         <Buttons
                             type='button'
                             text='back'
                             icon={<IoIosArrowRoundBack style={{ transform: 'translateY(2px)' }} />}
                             style={{
-                                backgroundColor: 'rgb(234,236,239)',
+                                backgroundColor: '#fff',
                                 height: '2.5rem',
                                 width: '7.5rem',
-                                borderColor: 'rgb(234,236,239)',
+                                borderColor: '#fff',
                                 boxShadow: 'none',
                                 color: '#4a4a4a'
                             }}
@@ -303,12 +296,12 @@ const CreateClassForm = ({ }, ref) => {
                             text='Create'
                             icon={<SiNike style={{ transform: 'translateY(2px)' }} />}
                             style={{
-                                backgroundColor: 'rgb(66, 133, 244, 0.5)',
+                                backgroundColor: '#4285f480',
                                 height: '2.5rem',
                                 width: '7.5rem',
-                                borderColor: 'rgb(66, 133, 244, 0.5)',
+                                borderColor: '#4285f480',
                             }}
-                            onClick={()=>formOnSubmitHandler()}
+                            onClick={formOnSubmitHandler}
                         />
                     </div>
                 </div>
@@ -316,7 +309,7 @@ const CreateClassForm = ({ }, ref) => {
                     <span className="top-navbar__create-class__terms_conditions__header">Class Cover</span>
                     <br />
                 </div>
-            </form>
+            </div>
         </div>
     )
 }

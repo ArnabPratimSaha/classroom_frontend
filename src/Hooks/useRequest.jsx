@@ -12,7 +12,7 @@ const useRequest=(updateToken)=>{
                 data:option.body,
                 cancelToken:option.token,
                 params:option.query,
-                headers:option.headers
+                headers:option.headers,
             })
             setLoading(false);
             const response={

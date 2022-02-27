@@ -56,7 +56,7 @@ function App() {
                   <Outlet />
                 </Suspense>
               }>
-              <Route path="home" element={<Home />} />
+              <Route path="home" element={<Home name={name} image={image}  id={id} accesstoken={accesstoken} refreshtoken={refreshtoken} logOut={logOut} updateToken={updateToken}/>} />
               <Route path="calendar" element={<Calendar />} />
               <Route path="class/:classId" element={<ClassPage />} />
               <Route path="class-todo/:classId" element={<ClassToDo />} />

@@ -1,0 +1,21 @@
+.searchinput-topdiv {
+    position: relative;
+    display: flex;
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 5px ;
+}
+.searchinput-topdiv input{
+    border: 0;
+    color: #222;
+    font-family: 'Barlow Condensed';
+    background: transparent;
+}
+.searchinput-topdiv input:focus
+{
+    outline: none;
+}
+.searchinput-topdiv input::placeholder
+{
+    color: #666;
+}

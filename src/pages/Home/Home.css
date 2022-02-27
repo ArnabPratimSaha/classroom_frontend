@@ -1,51 +1,61 @@
 .home-page__full-div{
     width: 100%;
     height: fit-content;
-    min-height: 100vh;
+    height: 100vh;
     background-color: #F3F2EF;
     padding-top: 4rem;
+    box-sizing: border-box;
 }
 
 .home-page__classes__div{
     width: 100%;
     height: 100%;
-    /* background-color: red; */
     margin-left: 4.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .home-page__enrolled-classes__div{
     box-sizing: content-box;
-    height: 100%;
     width: calc(100% - 6rem);
     padding: 10px;
     padding-right: 20px;
     display: grid;
     grid-template-columns: repeat(4,1fr);
+    overflow-y: scroll;
+    flex: 1;
 }
 
 .home-page__enrolled-classes__heading-div{
     font-family: 'Barlow Condensed';
     font-size: 2rem;
     font-weight: 700;
-    color: #607d8b;
-    /* color: #1967D2; */
     margin-left: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:  calc(100% - 6rem);
+}
+.heading-div-classes{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.heading-div-classes span{
+    color: #607d8b;
 }
 
-
-.home-page__enrolled-classes__heading-div span:nth-child(1){
+.heading-div-classes span:nth-child(1){
     display: inline-block;
     font-size: 3rem;
 }
-.home-page__enrolled-classes__heading-div span:nth-child(2){
-    transform: translateY(-10px);
+.heading-div-classes span:nth-child(2){
     display: inline-block;
     border-bottom: 4px solid #607d8b;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    margin: 0 5px;
 }
-.home-page__enrolled-classes__heading-div span:nth-child(3){
+.heading-div-classes span:nth-child(3){
     display: inline-block;
     font-size: 3rem;
 }
@@ -60,12 +70,23 @@
     }
 }
 @media(max-width : 700px){
-    
+    .heading-div-classes span:nth-child(1){
+        font-size: 1.5rem;
+    }
+    .heading-div-classes span:nth-child(2){
+        font-size: 1rem;
+    }
+    .heading-div-classes span:nth-child(3){
+        font-size: 1.5rem;
+    }
     .home-page__classes__div{
         margin-left: 0;
     }
     .home-page__enrolled-classes__div{
         width: calc(100% - .5rem);
         grid-template-columns: 1fr;
+    }
+    .home-page__enrolled-classes__heading-div{
+        width: 95%;
     }
 }
