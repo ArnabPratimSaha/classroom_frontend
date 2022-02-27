@@ -11,7 +11,8 @@ const ClassCard = ({
         department,
         className,
         adminName,
-        classId
+        classId,
+        parentRef
     }) => {
 
     const navigate = useNavigate()
@@ -31,7 +32,7 @@ const ClassCard = ({
     }
 
     return (
-        <div className="class-card__full-div" >
+        <div ref={parentRef} className="class-card__full-div" >
             <div className="class-card__upper-div" onClick={()=>navigate(`/class/${classId}`)}>
                 <span className="class-card__class-name">
                     {className && className}

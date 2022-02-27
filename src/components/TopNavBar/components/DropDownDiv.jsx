@@ -26,8 +26,8 @@ const DropDownDiv = ({ itemArray } , ref) => {
             {itemArray &&
                 itemArray.map((eachItem,index) => {
                     return (
-                    <>
-                        <div onClick = {() => {
+                    <div key={index}>
+                        <div  onClick = {() => {
                             if(reference && reference.current && reference.current.classList.contains('open-drop-down__div')){
                                 reference.current.classList.remove('open-drop-down__div')
                             }
@@ -36,7 +36,7 @@ const DropDownDiv = ({ itemArray } , ref) => {
                             {eachItem}
                         </div>
                         {index < (itemArray.length - 1) && <div className='underline' style = {{margin : '2px auto'}} ></div>}
-                    </>
+                    </div>
                     );
                 })}
         </div>

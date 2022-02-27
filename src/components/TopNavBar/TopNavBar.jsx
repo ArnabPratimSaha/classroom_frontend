@@ -74,15 +74,15 @@ const TopNavBar = ({ id,name,image, accesstoken, refreshtoken, logOut, updateTok
 
     const modalClickHandler = () => {
 
-        if(modalRef && modalRef.current){
+        if( modalRef.current){
             modalRef.current.style.display = 'none';
         }
 
-        if(createClassFormRef && createClassFormRef.current){
+        if(createClassFormRef.current){
             createClassFormRef.current.style.display = 'none'
         }
 
-        if(joinClassFormRef && joinClassFormRef.current){
+        if(joinClassFormRef.current){
             joinClassFormRef.current.style.display = 'none'
         }
 
@@ -153,12 +153,16 @@ const TopNavBar = ({ id,name,image, accesstoken, refreshtoken, logOut, updateTok
                 </button>
             </div>
         </div>
-            <div ref = {modalRef} onClick={() => {modalClickHandler()}} className="top-navbar__modal"></div>
+            <div ref={modalRef} onClick={() => { modalClickHandler() }} className="top-navbar__modal"></div>
             <CreateClassForm
-                ref = {createClassFormRef}
+                ref={createClassFormRef}
+                id={id}
+                accesstoken={accesstoken}
+                refreshtoken={refreshtoken}
+                updateToken={updateToken}
             />
             <JoinClassForm
-                ref = {joinClassFormRef}
+                ref={joinClassFormRef}
             />
         </>
     );
