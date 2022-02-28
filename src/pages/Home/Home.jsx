@@ -6,9 +6,11 @@ import useRequest from "../../Hooks/useRequest";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import SearchInput from "../../components/searchInput/searchInput";
 import {BiSearchAlt } from "react-icons/bi";
+import { useSelector } from "react-redux";
 
-const Home=({id,name,image, accesstoken, refreshtoken, logOut, updateToken })=> {
-    const [makeRequst, loading]=useRequest(updateToken);
+const Home=({})=> {
+    const { isLoggedIn,accesstoken,refreshtoken,user,id }=useSelector(state=>state.userReducer);
+    // const [makeRequst, loading]=useRequest(updateToken);
     const [classes,setClasses]=useState([]);
     const [page,setPage]=useState(1);
     const observer = useRef();
@@ -29,28 +31,25 @@ const Home=({id,name,image, accesstoken, refreshtoken, logOut, updateToken })=> 
         setClasses(s=>new Array());
     },[searchText])
     useEffect(()=>{
-        console.log(page);
-    },[page])
-    useEffect(()=>{
         const headers={
             id,accesstoken,refreshtoken
         }
-        const CancelToken = axios.CancelToken;
-        const source = CancelToken.source();
-        makeRequst(`${process.env.REACT_APP_API}/user/classes`, { headers, query: { query: searchText.trim(), page: page, limit: 1 }, token: source.token })
-            .then(res => {
-            if(res.status===200){
-                const classData=res.data.classes||[];
-                setClasses(l => [...l, ...classData]);
-                setHasMoreData(classData.length>0)
-            }
-        }).catch(err=>{
-            if(axios.isAxiosError(err))
-                console.log(err.message);
-        })
-        return () => {
-            source.cancel('canceling the request');
-        }
+        // const CancelToken = axios.CancelToken;
+        // const source = CancelToken.source();
+        // makeRequst(`${process.env.REACT_APP_API}/user/classes`, { headers, query: { query: searchText.trim(), page: page, limit: 1 }, token: source.token })
+        //     .then(res => {
+        //     if(res.status===200){
+        //         const classData=res.data.classes||[];
+        //         setClasses(l => [...l, ...classData]);
+        //         setHasMoreData(classData.length>0)
+        //     }
+        // }).catch(err=>{
+        //     if(axios.isAxiosError(err))
+        //         console.log(err.message);
+        // })
+        // return () => {
+        //     source.cancel('canceling the request');
+        // }
     },[page,searchText])
 
     return (

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import "./App.css";
 import IntroPage from "./pages/IntroPage/IntroPage";
 import Signup from "./pages/signup/Signup";
@@ -19,6 +19,7 @@ import TopNavBar from "./components/TopNavBar/TopNavBar";
 import LeftNavbar from "./components/LeftNavbar/LeftNavbar";
 import ClassToDo from "./pages/ClassToDo/ClassToDo";
 import ClassPeople from "./pages/ClassPeople/ClassPeople";
+import { useSelector } from 'react-redux';
 
 
 const Home = lazy(() => import("./pages/Home/Home"))
@@ -29,8 +30,9 @@ const AssignmentPage = lazy(() => import("./pages/AssignmentPage/AssignmentPage"
 const unprotectedRoutes = new Set('/', '/signup', '/auth', '/error');
 
 function App() {
-
-  const [id, name, image, userInfo,  accesstoken, refreshtoken, isLoading, login, logOut, updateToken] = useAuth();
+  const loading=useSelector(state=>state.loadingReducer)
+  const userState=useSelector(state=>state.userReducer)
+  useAuth();
 
   return (
     <div className="App">
@@ -38,15 +40,15 @@ function App() {
         <Routes>
           <Route path="/" element={<IntroPage />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/auth/:id/:accesstoken/:refreshtoken" element={<Auth />} />
           <Route path="/error" element={<Error />} />
           <Route element={
             <>
-              <TopNavBar name={name} image={image}  id={id} accesstoken={accesstoken} refreshtoken={refreshtoken} logOut={logOut} updateToken={updateToken} />
+              <TopNavBar />
               <LeftNavbar />
               <ProtectedRoutes
-                id={id}
-                isLoading={isLoading}
+                isAuth={userState.isLoggedIn}
+                isLoading={loading}
               />
             </>
           }>
@@ -56,7 +58,7 @@ function App() {
                   <Outlet />
                 </Suspense>
               }>
-              <Route path="home" element={<Home name={name} image={image}  id={id} accesstoken={accesstoken} refreshtoken={refreshtoken} logOut={logOut} updateToken={updateToken}/>} />
+              <Route path="home" element={<Home />} />
               <Route path="calendar" element={<Calendar />} />
               <Route path="class/:classId" element={<ClassPage />} />
               <Route path="class-todo/:classId" element={<ClassToDo />} />
