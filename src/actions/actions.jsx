@@ -4,4 +4,5 @@ const classPage = (bool) => {
     }
 }
 
+
 export { classPage }

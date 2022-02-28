@@ -15,8 +15,9 @@ import { useMatch, useNavigate } from "react-router-dom";
 import useRequest from '../../Hooks/useRequest'
 const noPic = 'https://cdn.imgbin.com/14/14/14/imgbin-avatar-beard-icon-bearded-uncle-u7a1CeQFm4JCA4v8a97sbEgsa.jpg'
 
-const TopNavBar = ({ id,name,image, accesstoken, refreshtoken, logOut, updateToken }) => {
-    const [makeRequst, loading] = useRequest(updateToken);
+const TopNavBar = ({ }) => {
+    const { isLoggedIn, accesstoken, refreshtoken, user, id } = useSelector(state => state.userReducer);
+    const [makeRequst, loading] = useRequest();
     const dropDownRef = useRef();
     const createClassFormRef = useRef();
     const joinClassFormRef = useRef();
@@ -89,7 +90,7 @@ const TopNavBar = ({ id,name,image, accesstoken, refreshtoken, logOut, updateTok
     }
     const handleLogout=async()=>{
         try {
-            (await logOut())&&navigate('/')
+            // (await logOut())&&navigate('/')
         } catch (error) {
             
         }
@@ -135,7 +136,7 @@ const TopNavBar = ({ id,name,image, accesstoken, refreshtoken, logOut, updateTok
                     />
                 </button>
                 <button className="top-navbar__user-info" onBlur={()=>{setIsUserCardVisible(false)}}>
-                    <img  className="top-navbar__user-info_image" src={image||noPic} alt="img"  onClick={()=>{setIsUserCardVisible(s=>!s)}} />
+                    <img  className="top-navbar__user-info_image" src={user.avatar||noPic} alt="img"  onClick={()=>{setIsUserCardVisible(s=>!s)}} />
                     <div ref={usercard} className={`top-navbar__user-card ${!isUserCardVisible && 'user-card__hidden'}`} >
                         <div className="top-navbar__user-card_profile" onClick={()=>{ setIsUserCardVisible(false);}}>
                             <CgProfile/>
@@ -159,7 +160,6 @@ const TopNavBar = ({ id,name,image, accesstoken, refreshtoken, logOut, updateTok
                 id={id}
                 accesstoken={accesstoken}
                 refreshtoken={refreshtoken}
-                updateToken={updateToken}
             />
             <JoinClassForm
                 ref={joinClassFormRef}
