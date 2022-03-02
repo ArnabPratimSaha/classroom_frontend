@@ -1,36 +1,34 @@
 import React, { useEffect } from 'react'
 import './Auth.css'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import axios from 'axios'
-import { useSelector,useDispatch } from 'react-redux'
-import login from '../../actions/userAction'
-import loadingChange from '../../actions/loadingAction'
+import { useDispatch } from 'react-redux'
+import login from '../../redux/actions/userAction'
+import loadingChange from '../../redux/actions/loadingAction'
 
 function Auth() {
 
-    const { id, accesstoken, refreshtoken } = useParams();
+    const { id, accessToken, refreshToken } = useParams();
     const dispatch = useDispatch();
-    const loading=useSelector(state=>state.loadingReducer);
-    const userState=useSelector(state=>state.userReducer);
     const navigate=useNavigate();
     
 
     useEffect(() => {
-        if(id && accesstoken && refreshtoken){
+        if(id && accessToken && refreshToken){
             dispatch(loadingChange("START"))
-            const headers={id,accesstoken,refreshtoken};
+            const headers={id,accesstoken:accessToken,refreshtoken:refreshToken};
             axios.get(`${process.env.REACT_APP_API}/user/info`,{headers}).then(res=>{
                 dispatch(loadingChange('STOP'))
                 if(res.status===200){
                     
                     const data=res.data;
                     Cookies.set('id' , id , {expires : 365})
-                    Cookies.set('accesstoken', accesstoken, { expires: 365 })
-                    Cookies.set('refreshtoken', refreshtoken, { expires: 365 })
+                    Cookies.set('accessToken', accessToken, { expires: 365 })
+                    Cookies.set('refreshToken', refreshToken, { expires: 365 })
                     dispatch(login({
-                            accesstoken: accesstoken,
-                            refreshtoken: refreshtoken,
+                            accessToken: accessToken,
+                            refreshToken: refreshToken,
                             id: data.user.id,
                             user: data.user
                         }))

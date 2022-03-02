@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom"
-import { classPage } from "../../actions/actions";
+import { classPage } from "../../redux/actions/actions";
 import './ClassToDo.css'
 import AssignedTasks from "./components/AssignedTasks";
 import CompletedTasks from "./components/CompletedTasks";

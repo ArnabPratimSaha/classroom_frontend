@@ -7,11 +7,12 @@ import { IoIosArrowRoundBack } from 'react-icons/io'
 import { AiOutlineCheck,AiOutlineCloseCircle } from 'react-icons/ai';
 import { VscDiffAdded } from 'react-icons/vsc';
 import { BsArrowUpCircle } from 'react-icons/bs';
-import useRequest from "../../../Hooks/useRequest";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const CreateClassForm = ({  id, accesstoken, refreshtoken ,updateToken  }, ref) => {
-    const [makeRequst, loading] = useRequest(updateToken);
+const CreateClassForm = ({   }, ref) => {
+    const userState=useSelector(state=>state.userReducer);
     const imagePreviewRef = useRef();
     const pickFileRef = useRef();
     const checkBoxRef = useRef();
@@ -26,6 +27,7 @@ const CreateClassForm = ({  id, accesstoken, refreshtoken ,updateToken  }, ref) 
 
     const [fieldInputValue,setFiledInputValue]=useState('');
     const [fieldAttributes,setFieldAttributes]=useState([]);
+    const navigate=useNavigate();
     useEffect(() => {
 
         if (file) {
@@ -88,7 +90,7 @@ const CreateClassForm = ({  id, accesstoken, refreshtoken ,updateToken  }, ref) 
             // error occurred
             return;
         }
-
+        console.log(className);
         var length=fieldAttributes.length;
         const formData = new FormData();
         formData.append('files', file);
@@ -97,15 +99,22 @@ const CreateClassForm = ({  id, accesstoken, refreshtoken ,updateToken  }, ref) 
         formData.append('fields', JSON.stringify(fieldAttributes.map((f)=>[f,length--])));
         // axios request to backend
         const headers={
-            id,accesstoken,refreshtoken,"Content-Type": "multipart/form-data" 
+            id:userState.id,
+            accesstoken:userState.accessToken,
+            refreshtoken:userState.refreshToken,
+            "Content-Type": "multipart/form-data" 
         }
         try {
-            const res=await makeRequst(`${process.env.REACT_APP_API}/class/create`,{
+            const res=await axios(`${process.env.REACT_APP_API}/class/create`,{
                 headers,
-                method:'post',
-                body:formData
+                method:'POST',
+                data:formData
             })
-            console.log(res.data);
+            if(res.status===200){
+                const data=res.data.class;
+                if(data && data.id)
+                    navigate(`/class/${data.id}`)
+            }
         } catch (error) {}
     }
     const handleFormAttributeButtonClicked=()=>{

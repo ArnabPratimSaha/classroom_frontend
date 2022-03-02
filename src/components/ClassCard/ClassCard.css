@@ -1,6 +1,6 @@
 .class-card__full-div{
     min-width: 15rem;
-    height: 18rem;
+    height: 100%;
     border-radius: 10px;
     background-color: white;
     position: relative;
@@ -8,7 +8,6 @@
     border: 1px solid #E0DFDC;
     overflow: hidden;
     z-index: 1;
-    margin: 5px 5px 5px 0;
 }
 
 .class-card__upper-div{
@@ -25,8 +24,8 @@
 }
 
 .class-card__class-picture__div{
-    height: 5rem;
-    width: 5rem;
+    height: 4rem;
+    width: 4rem;
     position: absolute;
     right: 10px;
     bottom: -2.5rem;
