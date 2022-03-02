@@ -1,29 +1,27 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import loadingChange from "../actions/loadingAction";
 import login, { logout } from "../actions/userAction";
 
 const useAuth = () => {
-  const userState=useSelector(state=>state.userReducer);
-  const dispatch=useDispatch();
-  const loading=useSelector(state=>state.loadingReducer);
+  const userState = useSelector(state => state.userReducer);
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.loadingReducer);
 
 
-
-  useEffect(()=>{
-    console.log(userState)
-  },[userState])
   useEffect(() => {
 
-    const id=Cookies.get('id');
+    const id = Cookies.get('id');
     const accesstoken = Cookies.get('accesstoken');
     const refreshtoken = Cookies.get('refreshtoken');
-    if(!id||!accesstoken||!refreshtoken){
+
+    if (!id || !accesstoken || !refreshtoken) {
       dispatch(logout());
-      return;
+      return; 
     }
+
     dispatch(loadingChange('START'));
     const headers = { id, accesstoken, refreshtoken };
     axios.get(`${process.env.REACT_APP_API}/user/info`, { headers }).then(res => {
@@ -37,7 +35,7 @@ const useAuth = () => {
           user: data.user
         }))
       }
-    }).catch(err=>{
+    }).catch(err => {
       dispatch(loadingChange('STOP'));
       dispatch(logout())
     })

@@ -6,7 +6,7 @@ const userReducer = (state = {
     user:{}
 }, action) => {
     switch(action.type){
-        case 'LOGIN': {
+        case 'LOGIN': { 
             return {
                 isLoggedIn: true,
                 accesstoken: action.payload.accesstoken,
