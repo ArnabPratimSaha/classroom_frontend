@@ -12,7 +12,8 @@ const ClassCard = ({
         className,
         adminName,
         classId,
-        parentRef
+        parentRef,
+        classData
     }) => {
 
     const navigate = useNavigate()
