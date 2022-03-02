@@ -7,9 +7,9 @@ import { IoIosArrowRoundBack } from 'react-icons/io'
 import { AiOutlineCheck,AiOutlineCloseCircle } from 'react-icons/ai';
 import { VscDiffAdded } from 'react-icons/vsc';
 import { BsArrowUpCircle } from 'react-icons/bs';
-import useRequest from "../../../Hooks/useRequest";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateClassForm = ({   }, ref) => {
     const userState=useSelector(state=>state.userReducer);
@@ -27,6 +27,7 @@ const CreateClassForm = ({   }, ref) => {
 
     const [fieldInputValue,setFiledInputValue]=useState('');
     const [fieldAttributes,setFieldAttributes]=useState([]);
+    const navigate=useNavigate();
     useEffect(() => {
 
         if (file) {
@@ -89,7 +90,7 @@ const CreateClassForm = ({   }, ref) => {
             // error occurred
             return;
         }
-
+        console.log(className);
         var length=fieldAttributes.length;
         const formData = new FormData();
         formData.append('files', file);
@@ -98,15 +99,22 @@ const CreateClassForm = ({   }, ref) => {
         formData.append('fields', JSON.stringify(fieldAttributes.map((f)=>[f,length--])));
         // axios request to backend
         const headers={
-            id:userState.id,accesstoken:userState.accessToken,refreshtoken:userState.refreshToken,"Content-Type": "multipart/form-data" 
+            id:userState.id,
+            accesstoken:userState.accessToken,
+            refreshtoken:userState.refreshToken,
+            "Content-Type": "multipart/form-data" 
         }
         try {
             const res=await axios(`${process.env.REACT_APP_API}/class/create`,{
                 headers,
                 method:'POST',
-                body:formData
+                data:formData
             })
-            console.log(res.data);
+            if(res.status===200){
+                const data=res.data.class;
+                if(data && data.id)
+                    navigate(`/class/${data.id}`)
+            }
         } catch (error) {}
     }
     const handleFormAttributeButtonClicked=()=>{

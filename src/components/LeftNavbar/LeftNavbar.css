@@ -62,8 +62,13 @@
 
 .leftnavbar__enrolled-classes__inner-div{
     padding: 20px 20px 20px 0;
+    box-sizing: border-box;
+    overflow-y: scroll;
 }
-
+.leftnavbar__enrolled-classes__inner-div::-webkit-scrollbar
+{
+    display: none;
+}
 .class-avatar__full-div{
     width: 2.5rem;
     height: 2.5rem;

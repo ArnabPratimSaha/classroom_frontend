@@ -88,9 +88,9 @@ const Home = ({ }) => {
                 <div className="home-page__enrolled-classes__div">
                     {classData.map((c,i)=>
                         ((i+1)===classData.length)?
-                            <ClassCard parentRef={context} classId={c.id} key={i} className={c.name} department="Computer Science and Engineering"/>
+                            <ClassCard parentRef={context} classData={c} classId={c.id} key={i} className={c.name} department="Computer Science and Engineering"/>
                         :
-                            <ClassCard classId={c.id} key={i} className={c.name} department="Computer Science and Engineering"/> 
+                            <ClassCard classData={c} classId={c.id} key={i} className={c.name} department="Computer Science and Engineering"/> 
                         )}
                 </div>
             </div>

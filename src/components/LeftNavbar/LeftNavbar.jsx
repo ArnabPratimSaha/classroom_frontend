@@ -6,10 +6,10 @@ import { AiOutlineHome, AiOutlineCalendar } from "react-icons/ai";
 import { ImFilesEmpty } from "react-icons/im";
 import { SiGooglescholar } from "react-icons/si";
 import { BsCaretDown } from "react-icons/bs";
-import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const ClassAvatar = ({class_name , style}) => {
-    return(
+const ClassAvatar = ({ class_name, style }) => {
+    return (
         <div style={style && style} className="class-avatar__full-div">
             <span className="class-avatar__starting-letter">{class_name && class_name[0]}</span>
         </div>
@@ -18,8 +18,9 @@ const ClassAvatar = ({class_name , style}) => {
 
 const LeftNavbar = () => {
 
-    const [isOpened , setIsOpened] = useState(false);
+    const [isOpened, setIsOpened] = useState(false);
     const burgerButtonRef = useRef();
+    const { page, hasMoreData, query, classes } = useSelector(state => state.homePageReducer)
 
     const hamburgerButtonClickHandler = () => {
 
@@ -39,19 +40,19 @@ const LeftNavbar = () => {
                         icon={<AiOutlineHome />}
                         text="Home"
                         to="/home"
-                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
+                        activeStyle={!isOpened && { backgroundColor: 'transparent', boxShadow: 'none' }}
                     />
                     <NavLinks
                         icon={<AiOutlineCalendar />}
                         text="Calendar"
                         to="/calendar"
-                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
+                        activeStyle={!isOpened && { backgroundColor: 'transparent', boxShadow: 'none' }}
                     />
                     <NavLinks
                         icon={<ImFilesEmpty />}
                         text="Private Files"
                         to="/privatefiles"
-                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
+                        activeStyle={!isOpened && { backgroundColor: 'transparent', boxShadow: 'none' }}
                     />
                 </div>
                 <div className="underline"></div>
@@ -70,33 +71,16 @@ const LeftNavbar = () => {
                     />
                 </div>
                 <div className="leftnavbar__enrolled-classes__inner-div">
-                    <NavLinks
-                        icon={<ClassAvatar class_name = 'C++' />}
-                        text="C++"
-                        to="/home"
-                        style = {{
-                            paddingLeft : '12px'
+                    {classes.map((c,i)=><NavLinks 
+                        icon={<ClassAvatar class_name='C++' />}
+                        text={c.name}
+                        key={c.id}
+                        to={`/class/${c.id}`}
+                        style={{
+                            paddingLeft: '12px'
                         }}
-                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
-                    />
-                    <NavLinks
-                        icon={<ClassAvatar style = {{backgroundColor : '#607D8B'}} class_name = 'OOP' />}
-                        text="OOP"
-                        to="/calendar"
-                        style = {{
-                            paddingLeft : '12px'
-                        }}
-                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
-                    />
-                    <NavLinks
-                        icon={<ClassAvatar class_name = 'SAS' />}
-                        text="SAS"
-                        to="/privatefiles"
-                        style = {{
-                            paddingLeft : '12px'
-                        }}
-                        activeStyle = {!isOpened &&{backgroundColor : 'transparent' , boxShadow : 'none'}}
-                    />
+                        activeStyle={!isOpened && { backgroundColor: 'transparent', boxShadow: 'none' }}
+                    />)}
                 </div>
             </div>
         </div>
