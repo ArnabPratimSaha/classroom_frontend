@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react"
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { classPage } from "../../actions/actions";
+import { classPage } from "../../redux/actions/actions";
 import './ClassPeople.css'
 import ClassPeopleCard from "./Components/ClassPeopleCard";
 

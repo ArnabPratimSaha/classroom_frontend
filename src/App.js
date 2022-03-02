@@ -4,6 +4,7 @@ import IntroPage from "./pages/IntroPage/IntroPage";
 import Signup from "./pages/signup/Signup";
 import Auth from "./pages/Auth/Auth";
 import Error from "./pages/Error/Error";
+import Cookies from 'js-cookie';
 
 import {
   BrowserRouter as Router,
@@ -13,14 +14,12 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import useAuth from "./Hooks/useAuth";
 import ProtectedRoutes from "./pages/ProtectedRoutes/ProtectedRoutes";
 import TopNavBar from "./components/TopNavBar/TopNavBar";
 import LeftNavbar from "./components/LeftNavbar/LeftNavbar";
 import ClassToDo from "./pages/ClassToDo/ClassToDo";
 import ClassPeople from "./pages/ClassPeople/ClassPeople";
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 const Home = lazy(() => import("./pages/Home/Home"))
 const Calendar = lazy(() => import("./pages/Calendar/Calendar"));
@@ -31,8 +30,8 @@ const unprotectedRoutes = new Set('/', '/signup', '/auth', '/error');
 
 function App() {
   const loading=useSelector(state=>state.loadingReducer)
-  const userState=useSelector(state=>state.userReducer)
-  useAuth();
+  const userState=useSelector(state=>state.userReducer);
+  const dispatch=useDispatch();
 
   return (
     <div className="App">
@@ -40,7 +39,7 @@ function App() {
         <Routes>
           <Route path="/" element={<IntroPage />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/auth/:id/:accesstoken/:refreshtoken" element={<Auth />} />
+          <Route path="/auth/:id/:accessToken/:refreshToken" element={<Auth />} />
           <Route path="/error" element={<Error />} />
           <Route element={
             <>

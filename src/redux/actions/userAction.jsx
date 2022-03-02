@@ -1,10 +1,10 @@
 const login=(data)=>{
-    if(data.id && data.accesstoken && data.refreshtoken)
+    if(data.id && data.accessToken && data.refreshToken)
     return {
         type:"LOGIN",
         payload:{
-            accesstoken:data.accesstoken,
-            refreshtoken:data.refreshtoken,
+            accessToken:data.accessToken,
+            refreshToken:data.refreshToken,
             id:data.id,
             user:data.user
         }

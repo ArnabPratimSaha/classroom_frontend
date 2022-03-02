@@ -9,9 +9,10 @@ import { VscDiffAdded } from 'react-icons/vsc';
 import { BsArrowUpCircle } from 'react-icons/bs';
 import useRequest from "../../../Hooks/useRequest";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-const CreateClassForm = ({  id, accesstoken, refreshtoken ,updateToken  }, ref) => {
-    const [makeRequst, loading] = useRequest(updateToken);
+const CreateClassForm = ({   }, ref) => {
+    const userState=useSelector(state=>state.userReducer);
     const imagePreviewRef = useRef();
     const pickFileRef = useRef();
     const checkBoxRef = useRef();
@@ -97,12 +98,12 @@ const CreateClassForm = ({  id, accesstoken, refreshtoken ,updateToken  }, ref) 
         formData.append('fields', JSON.stringify(fieldAttributes.map((f)=>[f,length--])));
         // axios request to backend
         const headers={
-            id,accesstoken,refreshtoken,"Content-Type": "multipart/form-data" 
+            id:userState.id,accesstoken:userState.accessToken,refreshtoken:userState.refreshToken,"Content-Type": "multipart/form-data" 
         }
         try {
-            const res=await makeRequst(`${process.env.REACT_APP_API}/class/create`,{
+            const res=await axios(`${process.env.REACT_APP_API}/class/create`,{
                 headers,
-                method:'post',
+                method:'POST',
                 body:formData
             })
             console.log(res.data);
