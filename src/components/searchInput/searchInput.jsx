@@ -1,18 +1,12 @@
 import React,{memo} from 'react'
-import { useEffect } from 'react';
 import { useState } from 'react';
 import './searchInput.css';
-const SearchInput=({className,placeholder,onChange,icon})=> {
-    const [input,setInput]=useState("");
+const SearchInput=({className,placeholder,onChange,icon,value})=> {
     const [focus,setFocus]=useState(false);
-    useEffect(()=>{
-        onChange && onChange(input)
-    },[input])
-
   return (
-    <div className={`searchinput-topdiv ${className}`}>
+    <div className={`searchinput-topdiv ${className} ${focus && 'searchinput-topdiv__focus'}`}>
       {icon && icon}
-      <input type="text" name={placeholder} placeholder={placeholder} value={input} onChange={(e) => setInput(e.target.value)} />
+      <input type="text" name={placeholder} placeholder={placeholder} onFocus={()=>setFocus(true)} onBlur={()=>setFocus(false)} value={value} onChange={(e) => {onChange && onChange(e.target.value)}} />
     </div>
   )
 }

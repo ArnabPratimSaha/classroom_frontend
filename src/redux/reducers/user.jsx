@@ -1,7 +1,7 @@
 const userReducer = (state = {
     isLoggedIn:false,
-    accesstoken:null,
-    refreshtoken:null,
+    accessToken:null,
+    refreshToken:null,
     id:null,
     user:{}
 }, action) => {
@@ -9,8 +9,8 @@ const userReducer = (state = {
         case 'LOGIN': {
             return {
                 isLoggedIn: true,
-                accesstoken: action.payload.accesstoken,
-                refreshtoken: action.payload.refreshtoken,
+                accessToken: action.payload.accessToken,
+                refreshToken: action.payload.refreshToken,
                 id: action.payload.id,
                 user: action.payload.user
             };
@@ -18,8 +18,8 @@ const userReducer = (state = {
         case 'LOGOUT': {
             return {
                 isLoggedIn: false,
-                accesstoken: null,
-                refreshtoken: null,
+                accessToken: null,
+                refreshToken: null,
                 id: null,
                 user: {}
             };

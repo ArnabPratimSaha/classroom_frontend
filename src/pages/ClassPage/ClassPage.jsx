@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react"
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom"
-import { classPage } from '../../actions/actions'
+import { classPage } from '../../redux/actions/actions'
 import './ClassPage.css'
 import dummyCover from '../../images/dummyCover.jpg'
 import { BsInfoLg } from 'react-icons/bs'

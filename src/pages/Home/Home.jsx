@@ -2,54 +2,75 @@ import React,{useState,useEffect,useCallback,useRef} from "react";
 import "./Home.css";
 import axios from "axios";
 import ClassCard from "../../components/ClassCard/ClassCard";
-import useRequest from "../../Hooks/useRequest";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import SearchInput from "../../components/searchInput/searchInput";
 import {BiSearchAlt } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { update } from "../../redux/actions/homeAction";
 
-const Home=({})=> {
-    const { isLoggedIn,accesstoken,refreshtoken,user,id }=useSelector(state=>state.userReducer);
-    // const [makeRequst, loading]=useRequest(updateToken);
-    const [classes,setClasses]=useState([]);
-    const [page,setPage]=useState(1);
+
+const Home = ({ }) => {
+    //redux state
+    const { isLoggedIn, accessToken, refreshToken, user, id } = useSelector(state => state.userReducer);
+    const { page, classes, hasMoreData,query } = useSelector(state => state.homePageReducer)
+
+    const dispatch=useDispatch();
+
+    const [classData, setClassData] = useState(classes);
+    const [currentPage, setCurrentPage] = useState(page);
+    const [hasMoreClasses, setHasMoreClasses] = useState(hasMoreData);
+    
     const observer = useRef();
-    const [hasMoreData, setHasMoreData] = useState(true);
-    const [searchText,setSearchText]=useState('');
+    const [searchText, setSearchText] = useState(query);
+
     const context = useCallback(node => {
         if (observer.current) observer.current.disconnect();
         observer.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && hasMoreData) {
-                setPage(p => p + 1);
+            if (entries[0].isIntersecting && hasMoreClasses) {
+                setCurrentPage(p => p + 1);
             }
         })
         if(node)observer.current.observe(node);
-    }, [hasMoreData])
+    }, [hasMoreClasses])
     useEffect(()=>{
-        setHasMoreData(true);
-        setPage(1);
-        setClasses(s=>new Array());
+        setHasMoreClasses(true);
+        setCurrentPage(1);
+        setClassData(s=>new Array());
     },[searchText])
     useEffect(()=>{
-        const headers={
-            id,accesstoken,refreshtoken
+        dispatch(update({
+            page:currentPage,
+            hasMoreData:hasMoreClasses,
+            query:searchText,
+            classes:classData
+        }))
+    },[classData])
+    
+    useEffect(()=>{
+        const headers = {
+            id, accesstoken: accessToken, refreshtoken: refreshToken
         }
-        // const CancelToken = axios.CancelToken;
-        // const source = CancelToken.source();
-        // makeRequst(`${process.env.REACT_APP_API}/user/classes`, { headers, query: { query: searchText.trim(), page: page, limit: 1 }, token: source.token })
-        //     .then(res => {
-        //     if(res.status===200){
-        //         const classData=res.data.classes||[];
-        //         setClasses(l => [...l, ...classData]);
-        //         setHasMoreData(classData.length>0)
-        //     }
-        // }).catch(err=>{
-        //     if(axios.isAxiosError(err))
-        //         console.log(err.message);
-        // })
-        // return () => {
-        //     source.cancel('canceling the request');
-        // }
+        const CancelToken = axios.CancelToken;
+        const source = CancelToken.source();
+        axios(`${process.env.REACT_APP_API}/user/classes`, {
+            method: 'GET',
+            headers,
+            params:{ query: searchText.trim(), page: currentPage, limit: 20 },
+            token: source.token,
+        }).then(res => {
+            if (res.status === 200) {
+                console.log('calling');
+                const classData = res.data.classes || [];
+                setHasMoreClasses(classData.length === 0)
+                setClassData(l => [...l, ...classData]);
+            }
+        }).catch(err => {
+            if (axios.isAxiosError(err))
+                console.log(err.message);
+        })
+        return () => {
+            source.cancel('canceling the request');
+        }
     },[page,searchText])
 
     return (
@@ -61,15 +82,15 @@ const Home=({})=> {
                         <span>nrolled Classe</span>
                         <span>S</span>
                     </div>
-                    <SearchInput icon={<BiSearchAlt style={{fontSize:'1rem'}}/>} onChange={(v)=>setSearchText(v)} placeholder={'Search By Class Name'} />
+                    <SearchInput value={searchText} icon={<BiSearchAlt style={{fontSize:'1rem',color:'#42535c'}}/>} onChange={(v)=>setSearchText(v)} placeholder={'Search By Class Name'} />
                 </div>
                 <div style = {{width : 'calc(100vw + 20px)' , transform : 'translateX(-10px)'}} className="underline"></div>
                 <div className="home-page__enrolled-classes__div">
-                    {classes.map((c,i)=>
-                        ((i+1)===classes.length)?
-                            <ClassCard parentRef={context} classId={c.id} key={c.id} className={c.name} department="Computer Science and Engineering"/>
+                    {classData.map((c,i)=>
+                        ((i+1)===classData.length)?
+                            <ClassCard parentRef={context} classId={c.id} key={i} className={c.name} department="Computer Science and Engineering"/>
                         :
-                            <ClassCard classId={c.id} key={c.id} className={c.name} department="Computer Science and Engineering"/> 
+                            <ClassCard classId={c.id} key={i} className={c.name} department="Computer Science and Engineering"/> 
                         )}
                 </div>
             </div>
