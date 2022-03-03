@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useCallback,useRef} from "react";
+import React,{useState,useEffect,useCallback,useRef, memo} from "react";
 import "./Home.css";
 import axios from "axios";
 import ClassCard from "../../components/ClassCard/ClassCard";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { update } from "../../redux/actions/homeAction";
 
 
-const Home = ({ }) => {
+const Home = () => {
     //redux state
     const { isLoggedIn, accessToken, refreshToken, user, id } = useSelector(state => state.userReducer);
     const { page, classes, hasMoreData,query } = useSelector(state => state.homePageReducer)
@@ -32,6 +32,7 @@ const Home = ({ }) => {
         })
         if(node)observer.current.observe(node);
     }, [hasMoreClasses])
+
     useEffect(()=>{
         setHasMoreClasses(true);
         setCurrentPage(1);
@@ -55,13 +56,13 @@ const Home = ({ }) => {
         axios(`${process.env.REACT_APP_API}/user/classes`, {
             method: 'GET',
             headers,
-            params:{ query: searchText.trim(), page: currentPage, limit: 20 },
+            params:{ query: searchText.trim(), page: currentPage, limit: 1 },
             token: source.token,
         }).then(res => {
             if (res.status === 200) {
                 console.log('calling');
                 const classData = res.data.classes || [];
-                setHasMoreClasses(classData.length === 0)
+                setHasMoreClasses(classData.length > 0)
                 setClassData(l => [...l, ...classData]);
             }
         }).catch(err => {
@@ -71,7 +72,8 @@ const Home = ({ }) => {
         return () => {
             source.cancel('canceling the request');
         }
-    },[page,searchText])
+    },[currentPage,searchText])
+
 
     return (
         <div className="home-page__full-div">
@@ -87,7 +89,7 @@ const Home = ({ }) => {
                 <div style = {{width : 'calc(100vw + 20px)' , transform : 'translateX(-10px)'}} className="underline"></div>
                 <div className="home-page__enrolled-classes__div">
                     {classData.map((c,i)=>
-                        ((i+1)===classData.length)?
+                        ( i === classData.length - 1 ) ?
                             <ClassCard parentRef={context} classData={c} classId={c.id} key={i} className={c.name} department="Computer Science and Engineering"/>
                         :
                             <ClassCard classData={c} classId={c.id} key={i} className={c.name} department="Computer Science and Engineering"/> 
@@ -98,4 +100,4 @@ const Home = ({ }) => {
     );
 }
 
-export default Home;
+export default memo(Home);
