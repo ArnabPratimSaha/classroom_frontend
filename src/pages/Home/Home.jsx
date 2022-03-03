@@ -84,7 +84,7 @@ const Home = () => {
                         <span>nrolled Classe</span>
                         <span>S</span>
                     </div>
-                    <SearchInput value={searchText} icon={<BiSearchAlt style={{fontSize:'1rem',color:'#42535c'}}/>} onChange={(v)=>setSearchText(v)} placeholder={'Search By Class Name'} />
+                    <SearchInput value={searchText} icon={<BiSearchAlt style={{fontSize:'1rem',color:'#42535c'}}/>} onChange={(v)=>setSearchText(v)} placeholder={'Search by classname'} />
                 </div>
                 <div style = {{width : 'calc(100vw + 20px)' , transform : 'translateX(-10px)'}} className="underline"></div>
                 <div className="home-page__enrolled-classes__div">

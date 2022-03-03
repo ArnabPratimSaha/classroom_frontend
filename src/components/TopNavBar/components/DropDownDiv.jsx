@@ -1,7 +1,7 @@
 import './DropDownDiv.css'
 import { forwardRef, memo, useImperativeHandle, useRef ,useState} from 'react';
 
-const DropDownDiv = ({ itemArray } , ref) => {
+const DropDownDiv = ({ itemArray , style } , ref) => {
 
     const reference = useRef();
     const [isOpen,setIsOpen]=useState(false);
@@ -22,21 +22,18 @@ const DropDownDiv = ({ itemArray } , ref) => {
     }))
 
     return (
-        <div ref = {reference}  className="drop-down__div">
+        <div style = {style && style} ref = {reference}  className="drop-down__div">
             {itemArray &&
                 itemArray.map((eachItem,index) => {
                     return (
-                    <div key={index}>
-                        <div  onClick = {() => {
-                            if(reference && reference.current && reference.current.classList.contains('open-drop-down__div')){
-                                reference.current.classList.remove('open-drop-down__div')
-                            }
-                            eachItem.props.onClick && eachItem.props.onClick()
+                        <div key={index}>
+                            <div  onClick = {() => {
+                                eachItem.props.onClick && eachItem.props.onClick()
                             }} className="drop-down__div-items">
-                            {eachItem}
+                                {eachItem}
+                            </div>
+                            {index < (itemArray.length - 1) && <div className='underline' style = {{margin : '2px auto'}} ></div>}
                         </div>
-                        {index < (itemArray.length - 1) && <div className='underline' style = {{margin : '2px auto'}} ></div>}
-                    </div>
                     );
                 })}
         </div>

@@ -1,4 +1,5 @@
 .avatar__full-div{
+    box-sizing: border-box;
     width: fit-content;
     height: fit-content;
     cursor: pointer;
@@ -7,8 +8,8 @@
     display: inline-flex;
     justify-content: center;
     align-tracks: center;
-    box-sizing: border-box;
     border: none;
+    border: 2px solid #d3d3d3;
 }
 .avatar__full-div:focus{
     outline: none;
@@ -17,6 +18,7 @@
     height: 100%;
     width: 100%;
     border-radius: 100%;
+    border: 2px solid transparent;
     transition: transform 500ms ease-in-out;
 }
 
