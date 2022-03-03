@@ -12,7 +12,6 @@ import CreateClassForm from "./components/CreateClassForm";
 import JoinClassForm from "./components/JoinClassForm";
 import { useSelector } from "react-redux";
 import { useMatch, useNavigate } from "react-router-dom";
-import useRequest from '../../Hooks/useRequest'
 const noPic = 'https://cdn.imgbin.com/14/14/14/imgbin-avatar-beard-icon-bearded-uncle-u7a1CeQFm4JCA4v8a97sbEgsa.jpg'
 
 const TopNavBar = ({ }) => {
@@ -21,9 +20,10 @@ const TopNavBar = ({ }) => {
     const createClassFormRef = useRef();
     const joinClassFormRef = useRef();
     const modalRef = useRef();
-    const usercard = useRef();
-    const isClassPage = useSelector(state => state.isClassPage)
+    const userCard = useRef();
+    const profilePicDropDownRef = useRef();
 
+    const isClassPage = useSelector(state => state.isClassPage)
     const classFeedMatch = useMatch('/class/:classId')
     const classTodoMatch = useMatch('/class-todo/:classId')
     const classPeopleMatch = useMatch('/class-people/:classId')
@@ -32,7 +32,8 @@ const TopNavBar = ({ }) => {
     const [classId, setClassId] = useState(null);
     const [isUserCardVisible, setIsUserCardVisible] = useState(false);
     const [isClassButtonClick, setIsClassButtonClick] = useState(false);
-    const navigate = useNavigate();
+
+
     useEffect(() => {
 
         if (classFeedMatch && classFeedMatch.params && classFeedMatch.params.classId) {
@@ -134,9 +135,26 @@ const TopNavBar = ({ }) => {
                             itemArray={[<span onClick={() => { joinClassButtonClickHandler() }} key={1}>Join Class</span>, <span onClick={() => { createClassButtonClickHandler() }} key={2}>Create Class</span>]}
                         />
                     </button>
-                    <button className="top-navbar__user-info" onBlur={() => { setIsUserCardVisible(false) }}>
-                        <img className="top-navbar__user-info_image" src={user.avatar || noPic} alt="img" onClick={() => { setIsUserCardVisible(s => !s) }} />
-                        <div ref={usercard} className={`top-navbar__user-card ${!isUserCardVisible && 'user-card__hidden'}`} >
+                    <button className="top-navbar__user-info" onBlur={() => { 
+                        profilePicDropDownRef.current.close();
+                        setIsUserCardVisible(false)}
+                    }>
+                        {/* <img className="top-navbar__user-info_image" src={user.avatar || noPic} alt="img" 
+                            onClick={() => { 
+                                profilePicDropDownRef.current.open();
+                                setIsUserCardVisible(prev => !prev) 
+                            }}
+                        /> */}
+                        <Avatar
+                            image = {user.avatar}
+                            height = '3rem'
+                            width = '3rem'
+                            onClick={() => { 
+                                profilePicDropDownRef.current.open();
+                                setIsUserCardVisible(prev => !prev) 
+                            }}
+                        />
+                        {/* <div ref={userCard} className={`top-navbar__user-card ${!isUserCardVisible && 'user-card__hidden'}`} >
                             <div className="top-navbar__user-card_profile" onClick={() => { setIsUserCardVisible(false); }}>
                                 <CgProfile />
                                 Profile
@@ -149,7 +167,22 @@ const TopNavBar = ({ }) => {
                                 <AiOutlineLogout />
                                 logout
                             </div>
-                        </div>
+                        </div> */}
+
+                        <DropDownDiv
+                            style = {{
+                                minWidth : '12rem',
+                                width : 'fit-content',
+                                height : 'fit-content'
+                            }}
+                            ref = {profilePicDropDownRef}
+                            itemArray={[
+                                // <div className="top-navbar__user-card__username" ><span>{user && user.name}</span></div>,
+                                <div className="top-navbar__user-card__link" ><CgProfile style = {{marginRight : '10px'}}/>Profile</div>,
+                                <div className="top-navbar__user-card__link" ><AiFillSetting style = {{marginRight : '10px'}}/>Settings</div>,
+                                <div style = {{color : 'red'}} className="top-navbar__user-card__link" ><AiOutlineLogout style = {{marginRight : '10px'}}/>Logout</div>,          
+                            ]}
+                        />
                     </button>
                 </div>
             </div>

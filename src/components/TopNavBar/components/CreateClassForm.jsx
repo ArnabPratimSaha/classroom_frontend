@@ -27,6 +27,7 @@ const CreateClassForm = ({   }, ref) => {
 
     const [fieldInputValue,setFiledInputValue]=useState('');
     const [fieldAttributes,setFieldAttributes]=useState([]);
+
     const navigate=useNavigate();
     useEffect(() => {
 
@@ -115,7 +116,9 @@ const CreateClassForm = ({   }, ref) => {
                 if(data && data.id)
                     navigate(`/class/${data.id}`)
             }
-        } catch (error) {}
+        } catch (error) {
+            
+        }
     }
     const handleFormAttributeButtonClicked=()=>{
         if(fieldInputValue.length===0)return;

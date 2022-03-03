@@ -21,6 +21,8 @@ const ClassPage = () => {
         }
     },[])
 
+    
+
     return (
         <>
             <div className="class-feed__full-div">

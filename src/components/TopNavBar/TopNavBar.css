@@ -177,6 +177,24 @@
 {
     outline: none;
 }
+
+.top-navbar__user-card__link{
+    /* width: 30rem; */
+    display: flex;
+    align-items: center;
+}
+
+.top-navbar__user-card__username{
+    width: 100%;
+    font-size: 1.3rem;
+    color: rgb(96,125,139);
+    pointer-events: none;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .top-navbar__user-card_profile,.top-navbar__user-card_settings,.top-navbar__user-card_logout
 {
     border: 1px solid #b6b6b6;

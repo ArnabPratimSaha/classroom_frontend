@@ -46,8 +46,8 @@ function App() {
               <TopNavBar />
               <LeftNavbar />
               <ProtectedRoutes
-                isAuth={userState.isLoggedIn}
-                isLoading={loading}
+                isAuth={true}
+                isLoading={false}
               />
             </>
           }>

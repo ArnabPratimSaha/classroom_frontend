@@ -1,5 +1,6 @@
-import { memo, useEffect } from "react"
-import { useDispatch } from "react-redux";
+import axios from "axios";
+import { memo, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { classPage } from "../../redux/actions/actions";
 import './ClassPeople.css'
@@ -9,6 +10,11 @@ const ClassPeople = () => {
 
     const {classId} = useParams();
     const dispatch = useDispatch();
+    const {id , accessToken , refreshToken} = useSelector(state => state.userReducer)
+
+    const [students , setStudents] = useState([]);
+    const [teachers , setTeachers] = useState([]);
+
 
     useEffect(() => {
         dispatch(classPage(true))
@@ -16,6 +22,37 @@ const ClassPeople = () => {
             dispatch(classPage(false))
         }
     },[])
+
+    useEffect(() => {
+        const getClassPeoples = async() => {
+            if(id && accessToken && refreshToken && classId){
+                const header = {
+                    id : id,
+                    accesstoken : accessToken , 
+                    refreshtoken : refreshToken ,
+                    classid : classId,
+                }
+                try {
+
+                    const res = await axios(`${process.env.REACT_APP_API}/class/info`,{
+                        headers : header,
+                        method : 'GET'
+                    });
+    
+                    if(res.status === 200){
+                        setStudents(res.data.students)
+                        setTeachers(res.data.teachers)
+                    }
+                    
+                } catch (error) {
+                    console.log({error});
+                }
+            }
+        }
+
+        getClassPeoples();
+
+    },[id , accessToken , refreshToken , classId])
 
     return (
         <>
@@ -31,32 +68,30 @@ const ClassPeople = () => {
                     <div className="class-people__teachers-div">
                         <span className="class-people__role-header">Teachers</span>
                         <div style = {{marginBottom : '10px'}} className="underline"></div>
-                        <ClassPeopleCard
-                            name = "Sushanta"
-                        />
-                        <ClassPeopleCard
-                            name = "Sushanta"
-                        />
+                        {
+                            teachers && teachers.length > 0 && teachers.map((eachTeacher) => {
+                                return(
+                                    <ClassPeopleCard
+                                        key = {eachTeacher.id}
+                                        name = {eachTeacher.className && eachTeacher.className}
+                                    />
+                                )
+                            })
+                        }
                     </div>
                     <div className="class-people__students-div">
                         <span className="class-people__role-header">Students</span>
                         <div style = {{marginBottom : '10px'}} className="underline"></div>
-                        <ClassPeopleCard
-                            name = "Sushanta"
-                            rollNo = "19CS8023"
-                        />
-                        <ClassPeopleCard
-                            name = "Sushanta"
-                            rollNo = "19CS8023"
-                        />
-                        <ClassPeopleCard
-                            name = "Sushanta"
-                            rollNo = "19CS8023"
-                        />
-                        <ClassPeopleCard
-                            name = "Sushanta"
-                            rollNo = "19CS8023"
-                        />
+                        {
+                            students && students.length > 0 && students.map((eachStudent) => {
+                                return(
+                                    <ClassPeopleCard
+                                        key = {eachStudent.id}
+                                        name = {eachStudent.className && eachStudent.className}
+                                    />
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>
