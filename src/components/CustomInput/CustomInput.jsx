@@ -1,7 +1,7 @@
 import { forwardRef, memo } from "react"
 import './CustomInput.css'
 
-const CustomInput = ({type, placeholder, wrapperStyle, inputStyle, name,onChange,icon},ref) => {
+const CustomInput = ({type, placeholder, wrapperStyle, inputStyle, name, onChange, icon},ref) => {
 
     
 
