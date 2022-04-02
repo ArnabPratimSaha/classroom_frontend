@@ -23,7 +23,7 @@ const AssignedTasks = () => {
         <div className='assigned-tasks__full-div'>
             {assignedTasksArray && assignedTasksArray.map((eachAssignedTask) => {
                 return(
-                    <div key = {1} className='each-assigned-task__full-div'>
+                    <div key = {Math.random()} className='each-assigned-task__full-div'>
                         <span className='each-assigned-task__title'>{eachAssignedTask.title && eachAssignedTask.title}</span>
                         <br/>
                         <span className='each-assigned-task__due-date'><FaRegDotCircle className='each-assigned-task__icon' />{"Due : " + eachAssignedTask.due.toLocaleString()}</span>

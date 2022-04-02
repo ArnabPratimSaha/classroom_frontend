@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { classPage } from '../../redux/actions/actions'
@@ -17,6 +17,8 @@ const ClassPage = () => {
     const dispatch = useDispatch();
     const newAssignmentFormRef = useRef();
 
+    const [classData , setClassData] = useState(null);
+
     const { isLoggedIn, accessToken, refreshToken, user, id } = useSelector(state => state.userReducer);
 
     useEffect(() => {
@@ -25,6 +27,35 @@ const ClassPage = () => {
             dispatch(classPage(false))
         }
     }, [])
+
+    useEffect(() => {
+
+        const func = async() => {
+            if(!id || !refreshToken || !accessToken || !classId) return;
+
+            try {
+                const res = await axios({
+                    method : 'GET',
+                    url : `${process.env.REACT_APP_API}/class/info`,
+                    headers : {
+                        id : id,
+                        accesstoken : accessToken,
+                        refreshtoken : refreshToken,
+                        classid : classId,
+                    }
+                });
+    
+                if(res.status === 200){
+                    console.log({res : res.data.name});
+                }
+            } catch (error) {
+                console.log({error});
+            }
+        }
+
+        func();
+
+    },[id , classId , accessToken , refreshToken])
 
 
     return (

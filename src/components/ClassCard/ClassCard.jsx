@@ -8,52 +8,52 @@ import DropDownDiv from "../TopNavBar/components/DropDownDiv";
 import "./ClassCard.css";
 
 const ClassCard = ({
-        classDP,
-        classCoverPicture,
-        department,
-        className,
-        adminName,
-        classId,
-        parentRef,
-        classData
-    }) => {
-    
-    const userState = useSelector(state=>state.userReducer);
+    classDP,
+    classCoverPicture,
+    department,
+    className,
+    adminName,
+    classId,
+    parentRef,
+    classData
+}) => {
+
+    const userState = useSelector(state => state.userReducer);
 
     const navigate = useNavigate()
     const dropDownDivRef = useRef();
     const dropDownDivItemArray = [
-        <span style = {{pointerEvents : "none"}} onClick={()=>navigate(`/class/${classId}`)} >Visit</span>, 
-        <span onClick={() => { classArchiveHandler() }} >Archive</span>, 
-        <span style = {{pointerEvents : "none"}} onClick={() => { classUnEnrollHandler() }} >UnEnroll</span>, 
+        <span style={{ pointerEvents: "none" }} onClick={() => navigate(`/class/${classId}`)} >Visit</span>,
+        <span onClick={() => { classArchiveHandler() }} >Archive</span>,
+        <span style={{ pointerEvents: "none" }} onClick={() => { classUnEnrollHandler() }} >UnEnroll</span>,
         <span >Report</span>
     ];
-    const classUnEnrollHandler = async() => {
-        
+    const classUnEnrollHandler = async () => {
+
         const accessToken = userState.accessToken;
         const refreshToken = userState.refreshToken;
         const id = userState.id;
 
         const headers = {
-            id : id,
-            accesstoken : accessToken,
-            refreshtoken : refreshToken,
-            classid : classId,
+            id: id,
+            accesstoken: accessToken,
+            refreshtoken: refreshToken,
+            classid: classId,
         }
 
         try {
-            
-            const res = await axios(`${process.env.REACT_APP_API}/student/leave`,{
-                headers : headers,
-                method : 'DELETE'
+
+            const res = await axios(`${process.env.REACT_APP_API}/student/leave`, {
+                headers: headers,
+                method: 'DELETE'
             })
 
-            if(res.status === 200){
-                
+            if (res.status === 200) {
+
             }
 
         } catch (error) {
-            console.log({error});
+            console.log({ error });
             // navigate to error page or show a error
         }
 
@@ -65,7 +65,7 @@ const ClassCard = ({
 
     return (
         <div ref={parentRef} className="class-card__full-div" >
-            <div className="class-card__upper-div">
+            <div onClick={() => navigate(`/class/${classId}`)} className="class-card__upper-div">
                 <span className="class-card__class-name">
                     {className && className}
                 </span>
@@ -95,19 +95,29 @@ const ClassCard = ({
                 </div>
             </div>
             <div className="class-card__dots-div">
-                <button 
-                    onClick={()=>{
-                        if (dropDownDivRef.current) {
-                            dropDownDivRef.current.isOpen?dropDownDivRef.current.close():dropDownDivRef.current.open()
-                        }
-                    }}
+                <button
                     onBlur={() => {
                         if (dropDownDivRef.current && dropDownDivRef.current.close) {
                             dropDownDivRef.current.close();
                         }
                     }}
                     className="class-card__dots-icon-div">
-                    <BiDotsVerticalRounded />
+                    <div style={{
+                        height: '100%',
+                        width: '100%',
+                        borderRadius: '100%',
+                        position: 'absolute',
+                        left: '0',
+                        top: '0'
+                    }}
+                        onClick={() => {
+                            if (dropDownDivRef.current) {
+                                dropDownDivRef.current.isOpen ? dropDownDivRef.current.close() : dropDownDivRef.current.open()
+                            }
+                        }}
+                    ></div>
+                    <BiDotsVerticalRounded
+                    />
                     <DropDownDiv
                         ref={dropDownDivRef}
                         itemArray={dropDownDivItemArray}

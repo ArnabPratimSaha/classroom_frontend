@@ -11,9 +11,9 @@ const CompletedTasks = () => {
 
     return(
         <div className='completed-tasks__full-div'>
-            {completedTasksArray && completedTasksArray.map((eachCompletedTask) => {
+            {completedTasksArray && completedTasksArray.map((eachCompletedTask  , index) => {
                 return(
-                    <div key = {1} className='each-completed-task__full-div'>
+                    <div key = {Math.random()} className='each-completed-task__full-div'>
                         <span className='each-completed-task__title'>{eachCompletedTask.title && eachCompletedTask.title}</span>
                         <br/>
                         <span style = {{color : eachCompletedTask.isSubmitted ? 'green' : 'red'}} className='each-completed-task__is-completed'><FaRegDotCircle className='each-completed-task__icon' />{eachCompletedTask.isSubmitted ? "Submitted" : "Not Submitted"}</span>
