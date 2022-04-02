@@ -1,5 +1,6 @@
+import axios from "axios";
 import { memo, useEffect, useState } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { classPage } from "../../redux/actions/actions";
 import './ClassToDo.css'
@@ -9,6 +10,8 @@ import CompletedTasks from "./components/CompletedTasks";
 const ClassToDo = () => {
     const {classId} = useParams();
     const dispatch = useDispatch();
+
+    const { id , accessToken , refreshToken } = useSelector(state => state.userReducer);
 
     useEffect(() => {
         dispatch(classPage(true))
@@ -26,6 +29,37 @@ const ClassToDo = () => {
     const showCompletedTaskHandler = (e) => {
         setShowCompletedTasks(true);
     }
+
+    useEffect(() => {
+
+        const func = async() => {
+            if(!classId || !id || !accessToken || !refreshToken) return;
+
+            try {
+                const res = await axios({
+                    method : 'GET',
+                    url : `${process.env.REACT_APP_API}/class/info`,
+                    headers : {
+                        id : id,
+                        accesstoken : accessToken,
+                        refreshtoken : refreshToken,
+                        classid : classId,
+                    }
+                });
+    
+                if(res.status === 200){
+                    console.log({res : res.data});
+                }
+                
+            } catch (error) {
+                console.log({error});
+            }
+
+        }
+
+        func();
+
+    } , [classId , id , accessToken , refreshToken])
 
     return (
         <>

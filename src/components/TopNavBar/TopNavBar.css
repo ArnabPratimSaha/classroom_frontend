@@ -146,14 +146,14 @@
 {
     outline: none;
 }
-.top-navbar__user-info_image
+/* .top-navbar__user-info_image
 {
     height: 3.5rem;
     width: 3.5rem;
     border-radius: 100%;
     cursor: pointer;
-}
-.top-navbar__user-card
+} */
+/* .top-navbar__user-card
 {
     position: absolute;
     height: 10rem;
@@ -176,7 +176,7 @@
 .top-navbar__user-card:focus
 {
     outline: none;
-}
+} */
 
 .top-navbar__user-card__link{
     /* width: 30rem; */
