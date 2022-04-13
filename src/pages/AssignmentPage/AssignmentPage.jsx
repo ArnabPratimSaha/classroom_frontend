@@ -8,8 +8,14 @@ import { AiOutlineFilePdf, AiFillFileAdd } from 'react-icons/ai'
 import { VscReplaceAll } from 'react-icons/vsc'
 
 import Buttons from '../../components/Buttons/Buttons'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const AssignmentPage = () => {
+
+    const { classId, assignmentId } = useParams();
+    const { isLoggedIn, accessToken, refreshToken, user, id } = useSelector(state => state.userReducer);
 
     const addFileRef = useRef();
     const formSubmitRef = useRef();
@@ -22,16 +28,79 @@ const AssignmentPage = () => {
     const [uploadingFilePreview, setUploadingFilePreview] = useState(null);
     const [newAddedFiles, setNewAddedFiles] = useState([]);
 
+
+
+    const [assignment, setAssignment] = useState();
+    const [studentAssignmentData , setStudentAssignmentData] = useState(null)
+
     
 
-    const [assignment, setAssignment] = useState({
-        title: 'Make a Hash Table with generic array',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        isSubmitted: true,
-        submissionTime: new Date(),
-        submittedFile: File,
-        submittedFileName: 'HashTable.pdf',
-    });
+    useEffect(() => {
+
+        const func = async () => {
+
+            if (!id || !accessToken || !refreshToken || !classId || !assignmentId) return;
+
+            try {
+
+                const res = await axios({
+                    method: 'GET',
+                    url: `${process.env.REACT_APP_API}/assignment`,
+                    headers: {
+                        id: id,
+                        accesstoken: accessToken,
+                        refreshtoken: refreshToken,
+                        classid: classId,
+                        assignmentid: assignmentId,
+                    }
+                });
+
+                if(res.status === 200){
+                    setAssignment(res.data.assignment);
+                }
+
+            } catch (error) {
+                console.log({ error });
+            }
+        }
+
+        func();
+
+    }, [id, accessToken, refreshToken, classId, assignmentId])
+
+    useEffect(() => {
+
+        const func = async () => {
+
+            if (!id || !accessToken || !refreshToken || !classId || !assignmentId) return;
+
+            try {
+
+                const res = await axios({
+                    method: 'GET',
+                    url: `${process.env.REACT_APP_API}/assignment/submit`,
+                    headers: {
+                        id: id,
+                        accesstoken: accessToken,
+                        refreshtoken: refreshToken,
+                        classid: classId,
+                        assignmentid: assignmentId,
+                    }
+                });
+
+                if(res.status === 200){
+                    console.log(res.data.assignment);
+                }
+
+            } catch (error) {
+                console.log({ error });
+            }
+        }
+
+        func();
+
+    }, [id, accessToken, refreshToken, classId, assignmentId])
+
 
     const fileOnChangeHandler = async (e) => {
         const files = e.target.files;
@@ -101,7 +170,7 @@ const AssignmentPage = () => {
     )
 
     const renameFile = () => {
-        if(conflictingFileIndex && conflictingFileIndex.current !== -1 && conflictingNewFile && conflictingNewFile.current){
+        if (conflictingFileIndex && conflictingFileIndex.current !== -1 && conflictingNewFile && conflictingNewFile.current) {
             setNewAddedFiles(prev => {
                 conflictingNewFile.current.name += "_";
             })
@@ -109,7 +178,7 @@ const AssignmentPage = () => {
     }
 
     const replaceFile = () => {
-        if(conflictingFileIndex && conflictingFileIndex.current !== -1 && conflictingNewFile && conflictingNewFile.current){
+        if (conflictingFileIndex && conflictingFileIndex.current !== -1 && conflictingNewFile && conflictingNewFile.current) {
             setNewAddedFiles(prev => {
                 prev[conflictingFileIndex.current] = conflictingNewFile.current;
                 return prev;
@@ -144,7 +213,7 @@ const AssignmentPage = () => {
                         borderColor: 'orange',
                         marginRight: '20px'
                     }}
-                onClick = {renameFile}
+                    onClick={renameFile}
                 />
                 <Buttons
                     text='Rename'
@@ -162,7 +231,7 @@ const AssignmentPage = () => {
                         borderColor: 'orange',
                         marginRight: '20px'
                     }}
-                onClick = {replaceFile}
+                    onClick={replaceFile}
                 />
             </div>
             <div className='assignment-page__full-div'>
@@ -171,10 +240,10 @@ const AssignmentPage = () => {
                         {assignment.title}
                     </span>}
                     <div style={{ backgroundColor: 'orange', height: '4px', marginTop: '10px' }} className='underline'></div>
-                    {assignment && assignment.description &&
+                    {assignment && assignment.details &&
                         <div className='assignment-page__description-div'>
                             <span className='assignment-page__description-text'>
-                                {assignment.description}
+                                {assignment.details}
                             </span>
                         </div>}
                     <span className='assignment-page__submission-details-title'>
@@ -184,17 +253,17 @@ const AssignmentPage = () => {
                         Submission Details
                     </span>
                     <div className='assignment-page__submission-details__div'>
-                        <span style={{ color: assignment.isSubmitted ? 'green' : 'red' }} className='assignment__is-completed'><FaRegDotCircle style={{ marginRight: '10px' }} />{assignment && (assignment.isSubmitted ? "Submitted" : "Not Submitted")}</span>
+                        <span style={{ color: assignment && assignment.submittedStudent &&  assignment.submittedStudent.includes(id) ? 'green' : 'red' }} className='assignment__is-completed'><FaRegDotCircle style={{ marginRight: '10px' }} />{assignment && assignment.submittedStudent && (assignment.submittedStudent.includes(id) ? "Submitted" : "Not Submitted")}</span>
                         <br />
-                        <span className='assignment-page__assignment-submission-time'>{`Due : ${assignment && assignment.submissionTime && assignment.submissionTime.toLocaleString()}`}</span>
+                        <span className='assignment-page__assignment-submission-time'>{`Due : ${assignment && assignment.lastSubmittedDate && new Date(assignment.lastSubmittedDate).toLocaleString()}`}</span>
                         <br />
                         <span className='assignment-page__my-submitted-files-title'><FaRegDotCircle style={{ marginRight: '10px' }} />Submitted files</span>
-                        <div style={{ color: '#FB3449' }} className='assignment-page__my-submission-div'>
+                        {<div style={{ color: '#FB3449' }} className='assignment-page__my-submission-div'>
                             <AiOutlineFilePdf
                                 className='assignment-page__submitted-file__type-icon'
                             />
-                            <span className='assignment-page__submitted-file__name'>{assignment && assignment.submittedFileName && assignment.submittedFileName}</span>
-                        </div>
+                            {/* <span className='assignment-page__submitted-file__name'>{assignment && assignment.submittedFileName && assignment.submittedFileName}</span> */}
+                        </div>}
                     </div>
                     <br />
                     <form onSubmit={formOnSubmitHandler} type='submit'>

@@ -62,7 +62,7 @@ function App() {
               <Route path="class/:classId" element={<ClassPage />} />
               <Route path="class-todo/:classId" element={<ClassToDo />} />
               <Route path="class-people/:classId" element={<ClassPeople />} />
-              <Route path="assignment/:assignmentId" element={<AssignmentPage />} />
+              <Route path="assignment/:classId/:assignmentId" element={<AssignmentPage />} />
             </Route>
           </Route>
           <Route path="*" element={<Navigate to="/" />} />

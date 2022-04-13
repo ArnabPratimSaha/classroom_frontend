@@ -5,59 +5,59 @@ import './PostCard.css'
 import { BsTelephone } from 'react-icons/bs'
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 
-const PostCard = ({type , assignmentTitle , uploadDate , dueDate               , meetingTitle , meetingScheduleDate}) => {
+const PostCard = ({ type, assignmentTitle, uploadDate, dueDate, meetingTitle, meetingScheduleDate, viewAssignmentButtonClickHandler }) => {
 
     const getMonthName = (date) => {
         const month = date.getMonth() + 1;
 
-        switch(month){
-            case 1 : {
+        switch (month) {
+            case 1: {
                 return 'Jan';
             }
-            case 2 : {
+            case 2: {
                 return 'Feb';
             }
-            case 3 : {
+            case 3: {
                 return 'Mar';
             }
-            case 4 : {
+            case 4: {
                 return 'Apr';
             }
-            case 5 : {
+            case 5: {
                 return 'May';
             }
-            case 6 : {
+            case 6: {
                 return 'Jun';
             }
-            case 7 : {
+            case 7: {
                 return 'Jul';
             }
-            case 8 : {
+            case 8: {
                 return 'Aug';
             }
-            case 9 : {
+            case 9: {
                 return 'Sep';
             }
-            case 10 : {
+            case 10: {
                 return 'Oct';
             }
-            case 11 : {
+            case 11: {
                 return 'Nov';
             }
-            case 12 : {
+            case 12: {
                 return 'Dec';
             }
-            default : return 'undefined'
+            default: return 'undefined'
         }
     }
 
-    if(type === 'ASSIGNMENT'){
-        return(
+    if (type === 'ASSIGNMENT') {
+        return (
             <div className='postcard__assignment__full-div'>
                 <div className='postcard__assignment__avatar-div'>
                     <Avatar
-                        height = '3rem'
-                        width = '3rem'
+                        height='3rem'
+                        width='3rem'
                     />
                 </div>
                 <div className='postcard__assignment__content-div'>
@@ -70,21 +70,24 @@ const PostCard = ({type , assignmentTitle , uploadDate , dueDate               ,
                             <span className='postcard__assignment-title'>{assignmentTitle && assignmentTitle}</span>
                         </div>
                         {/* <div style = {{}} className='underline'></div> */}
-                        <br/>
+                        <br />
                         {dueDate && <span className='postcard__assignment-due-date'>{"Due : " + getMonthName(dueDate) + " " + dueDate.getDate().toString()}</span>}
-                        <br/>
-                        <br/>
-                        <div style = {{width : 'calc(100% + 20px)' , transform : 'translateX(-10px)'}} className='underline'></div>
-                        <br/>
+                        <br />
+                        <br />
+                        <div style={{ width: 'calc(100% + 20px)', transform: 'translateX(-10px)' }} className='underline'></div>
+                        <br />
                         <Buttons
-                            style = {{
-                                height : '2.5rem',
-                                width : '10rem',
-                                backgroundColor : 'rgba(25,103,210,0.1)',
-                                color : 'rgb(25,103,210)',
-                                borderColor : 'rgb(25,103,210)',
+                            onClick = {() => {
+                                viewAssignmentButtonClickHandler && viewAssignmentButtonClickHandler();
                             }}
-                            text = 'View assignment'
+                            style={{
+                                height: '2.5rem',
+                                width: '10rem',
+                                backgroundColor: 'rgba(25,103,210,0.1)',
+                                color: 'rgb(25,103,210)',
+                                borderColor: 'rgb(25,103,210)',
+                            }}
+                            text='View assignment'
                         />
                     </div>
                 </div>
@@ -92,12 +95,12 @@ const PostCard = ({type , assignmentTitle , uploadDate , dueDate               ,
         )
     }
 
-    return(
+    return (
         <div className='postcard__meeting__full-div'>
             <div className='postcard__meeting__avatar-div'>
                 <Avatar
-                    height = '3rem'
-                    width = '3rem'
+                    height='3rem'
+                    width='3rem'
                 />
             </div>
             <div className='postcard__meeting__content-div'>
@@ -108,16 +111,16 @@ const PostCard = ({type , assignmentTitle , uploadDate , dueDate               ,
                 <div className='postcard__meeting__lower-div'>
                     <div className='postcard__meeting__lower__left-div'>
                         <div className='postcard__meeting__icon-div'>
-                            <BsTelephone/>
+                            <BsTelephone />
                         </div>
                         <div className='postcard__meeting__title-div'>
                             <span className='postcard__meeting__title'>{meetingTitle && meetingTitle}</span>
-                            <br/>
+                            <br />
                             {meetingScheduleDate && <span className='postcard__meeting__scheduled-date'>{getMonthName(meetingScheduleDate) + " " + meetingScheduleDate.getDate() + " at " + meetingScheduleDate.getHours().toString() + ":" + meetingScheduleDate.getMinutes().toString()}</span>}
                         </div>
                     </div>
                     <div className='postcard__meeting__lower__right-div'>
-                        <BiDotsVerticalRounded/>
+                        <BiDotsVerticalRounded />
                     </div>
                 </div>
             </div>

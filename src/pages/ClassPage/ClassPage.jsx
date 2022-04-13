@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { classPage } from '../../redux/actions/actions'
 import './ClassPage.css'
 import dummyCover from '../../images/dummyCover.jpg'
@@ -16,10 +16,12 @@ const ClassPage = () => {
     const { classId } = useParams();
     const dispatch = useDispatch();
     const newAssignmentFormRef = useRef();
-
-    const [classData , setClassData] = useState(null);
+    const navigate = useNavigate();
 
     const { isLoggedIn, accessToken, refreshToken, user, id } = useSelector(state => state.userReducer);
+    
+    const [classData , setClassData] = useState(null);
+    const [assignmentsArray , setAssignmentsArray] = useState([]);
 
     useEffect(() => {
         dispatch(classPage(true))
@@ -46,7 +48,7 @@ const ClassPage = () => {
                 });
     
                 if(res.status === 200){
-                    console.log({res : res.data.name});
+                    setClassData(res.data.classData);
                 }
             } catch (error) {
                 console.log({error});
@@ -57,6 +59,42 @@ const ClassPage = () => {
 
     },[id , classId , accessToken , refreshToken])
 
+    useEffect(() => {
+
+        const func = async() => {
+
+            if(!id || !refreshToken || !accessToken || !classId) return;
+
+            try {
+                const res = await axios({
+                    method : 'GET',
+                    url : `${process.env.REACT_APP_API}/assignment/allassignments`,
+                    headers : {
+                        id : id,
+                        accesstoken : accessToken,
+                        refreshtoken : refreshToken,
+                        classid : classId,
+                    }
+                });
+    
+                if(res.status === 200){
+                    console.log(res.data.assignments.length);
+                    setAssignmentsArray(res.data.assignments);
+                }
+            } catch (error) {
+                console.log({error});
+            }
+
+        }
+
+        func();
+
+    },[id , classId , accessToken , refreshToken])
+
+
+    useEffect(() => {
+        console.log(assignmentsArray);
+    },[assignmentsArray])
 
     return (
         <>
@@ -72,7 +110,7 @@ const ClassPage = () => {
                     <div className="class-feed__cover-pic__div">
                         <img className="class-feed__cover-pic" alt='dummy-cover' src={dummyCover} />
                         <div className="class-feed__heading-div">
-                            <span className="class-feed__heading">Object Oriented Programming</span>
+                            <span className="class-feed__heading">{classData && classData.name}</span>
                         </div>
                         <div className="class-feed__info-button-div">
                             <button className="class-feed__info-button">
@@ -84,36 +122,22 @@ const ClassPage = () => {
                     <div style={{ width: "60rem" }} className="underline"></div>
                     <br />
                     <div className="class-feed__all-posts">
-                        <PostCard
-                            type='ASSIGNMENT'
-                            assignmentTitle='Hashing'
-                            uploadDate={new Date()}
-                            dueDate={new Date()}
-                        />
-                        <PostCard
-                            type='ASSIGNMENT'
-                            assignmentTitle='Hashing'
-                            uploadDate={new Date()}
-                            dueDate={new Date()}
-                        />
-                        <PostCard
-                            type='ASSIGNMENT'
-                            assignmentTitle='Hashing'
-                            uploadDate={new Date()}
-                            dueDate={new Date()}
-                        />
-                        <PostCard
-                            type='ASSIGNMENT'
-                            assignmentTitle='Hashing'
-                            uploadDate={new Date()}
-                            dueDate={new Date()}
-                        />
-                        <PostCard
-                            type='ASSIGNMENT'
-                            assignmentTitle='Hashing'
-                            uploadDate={new Date()}
-                            dueDate={new Date()}
-                        />
+                        {
+                            assignmentsArray && assignmentsArray.length > 0 && assignmentsArray.map((eachAssignment) => {
+                                return(
+                                    <PostCard
+                                        viewAssignmentButtonClickHandler = {() => {
+                                            navigate(`/assignment/${classId}/${eachAssignment.id}`)
+                                        }}
+                                        key = {eachAssignment.id}
+                                        type = 'ASSIGNMENT'
+                                        assignmentTitle = {eachAssignment.title}
+                                        uploadDate = {new Date(eachAssignment.createdAt)}
+                                        dueDate = {eachAssignment.lastSubmittedDate && new Date(eachAssignment.lastSubmittedDate)}
+                                    />
+                                )
+                            })
+                        }
                         <PostCard
                             // type = 'ASSIGNMENT'
                             meetingTitle='Hashing'
