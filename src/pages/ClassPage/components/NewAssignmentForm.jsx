@@ -5,7 +5,7 @@ import { MdOutlineAssignmentTurnedIn } from 'react-icons/md'
 import "./NewAssignmentForm.css";
 import axios from "axios";
 
-const NewAssignmentForm = ({ id, accessToken, refreshToken, classId }, ref) => {
+const NewAssignmentForm = ({ id, accessToken, refreshToken, classId, onFormSubmitHandler }, ref) => {
 
     const fullDivRef = useRef();
     const titleRef = useRef();
@@ -56,6 +56,8 @@ const NewAssignmentForm = ({ id, accessToken, refreshToken, classId }, ref) => {
 
             if(res.status === 200){
                 console.log({res});
+                onFormSubmitHandler && onFormSubmitHandler();
+                e.target.reset();
                 if(ref.current && ref.current.close) ref.current.close();
             }
 

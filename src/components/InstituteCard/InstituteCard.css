@@ -1,0 +1,21 @@
+.education-card__full-div{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.education-card__icon{
+    font-size: 2.5rem;
+    margin-right: 10px;
+    color: #128B08;
+}
+
+.education-card__details-div{
+}
+
+.education-card__details-spans{
+    display: block;
+    color: #404040;
+}

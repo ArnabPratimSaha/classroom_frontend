@@ -1,0 +1,35 @@
+/* Contact Card */
+
+.contact-card__div{
+    text-decoration: none;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    border-radius: 2px;
+    background-color: #4085F5;
+    border: 1px solid #4085F5;
+    width: 100%;
+}
+
+.contact-card__icon-div{
+    font-size: 1.4rem;
+    color: #C5221E;
+    background-color: white;
+    padding: 4px 6px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-card__text-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-card__text{
+    /* font-family: 'Barlow Condensed'; */
+    color: white;
+}

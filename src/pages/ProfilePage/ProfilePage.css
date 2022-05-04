@@ -1,0 +1,174 @@
+.profile-page__full-div {
+    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    background-color: #F4F5F8;
+    font-family: 'Barlow Condensed';
+    overflow-y: scroll;
+}
+
+/* .profile-page__full-div::-webkit-scrollbar{
+    width: 12px;
+    background-color: #bbbbbbbd;
+}
+
+.profile-page__full-div::-webkit-scrollbar-thumb{
+    background-color: #a2a2a2;
+    border-radius: 2px;
+} */
+
+.profile-page__inner-div {
+    width: 100%;
+    height: 100%;
+    padding: 64px 0 1rem 4rem;
+}
+
+.profile-page__upper-div {
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    z-index: 0;
+}
+
+.profile-page__cover-pic__div {
+    width: 100%;
+    height: 10rem;
+    background-color: #455265;
+    /* border: 2px solid white; */
+    cursor: pointer;
+}
+
+.profile-page__avatar-div {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 100%;
+    position: absolute;
+    left: 1rem;
+    top: calc(10rem - 3rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-page__bio-div {
+    margin-top: 4rem;
+    padding: 0 10px 10px 10px;
+}
+
+.profile-page__name-span {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.profile-page__about-div {
+    width: 100%;
+    height: fit-content;
+    padding: 0 10px 10px 10px;
+}
+
+.profile-page__user-details__div {
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 2px;
+}
+
+.profile-page__user-details__upper-div {
+    display: grid;
+    grid-template-columns: 1fr 2rem 2rem;
+    width: 100%;
+    align-items: center;
+}
+
+.profile-page__education-div {
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 2px;
+    /* border: 1px solid #F3F2EF; */
+}
+
+.profile-page__education-div__upper-div {
+    display: grid;
+    grid-template-columns: 1fr 2rem 2rem;
+    width: 100%;
+    align-items: center;
+}
+
+.profile-page__course-undertaken__div {
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 2px;
+}
+
+.profile-page__course-undertaken__upper-div {
+    display: grid;
+    grid-template-columns: 1fr 2rem;
+    width: 100%;
+    align-items: center;
+}
+
+.profile-page__interest-contact__div {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.profile-page__interest-div {
+    width: 50%;
+    /* height: 100%; */
+    background-color: white;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 2px;
+
+    display: flex;
+    flex-direction: column;
+    flex-basis: 0px;
+    flex-grow: 1;
+    margin-right: 10px;
+    /* overflow-y: auto; */
+}
+
+.profile-page__contact-details__div {
+    width: 50%;
+    height: fit-content;
+    background-color: white;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 2px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-page__contact__upper-div {
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+    display: grid;
+    grid-template-columns: 1fr 2rem 2rem;
+    width: 100%;
+    align-items: center;
+}
+
+.profile-page__contact__lower-div{
+    margin-left: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+@media(max-width : 600px) {
+    .profile-page__inner-div {
+        padding-left: 2px;
+    }
+}

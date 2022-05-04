@@ -11,7 +11,7 @@ import DropDownDiv from "./components/DropDownDiv";
 import CreateClassForm from "./components/CreateClassForm";
 import JoinClassForm from "./components/JoinClassForm";
 import { useSelector } from "react-redux";
-import { useMatch, useNavigate } from "react-router-dom";
+import { Navigate, useMatch, useNavigate } from "react-router-dom";
 const noPic =
     "https://cdn.imgbin.com/14/14/14/imgbin-avatar-beard-icon-bearded-uncle-u7a1CeQFm4JCA4v8a97sbEgsa.jpg";
 
@@ -24,6 +24,7 @@ const TopNavBar = ({ }) => {
     const joinClassFormRef = useRef();
     const modalRef = useRef();
     const profilePicDropDownRef = useRef();
+    const navigate = useNavigate();
 
     const isClassPage = useSelector((state) => state.isClassPage);
     const classFeedMatch = useMatch("/class/:classId");
@@ -199,7 +200,7 @@ const TopNavBar = ({ }) => {
                             ref={profilePicDropDownRef}
                             itemArray={[
                                 // <div className="top-navbar__user-card__username" ><span>{user && user.name}</span></div>,
-                                <div className="top-navbar__user-card__link">
+                                <div onClick = {() => {id && navigate(`/profilepage/${id}`)}} className="top-navbar__user-card__link">
                                     <CgProfile style={{ marginRight: "10px" }} />
                                     Profile
                                 </div>,

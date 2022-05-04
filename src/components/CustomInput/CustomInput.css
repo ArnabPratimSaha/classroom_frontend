@@ -6,10 +6,10 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    background-color: #ececec;
+    background-color: #ececec6b;
     padding: 10px 15px 5px 15px;
     border-radius: 5px 5px 0 0;
-    border-bottom: 1px solid #404042;
+    border-bottom: 2px solid #455265;
 }
 .custom-input-div
 {
@@ -23,7 +23,7 @@
     background: none;
     outline: none;
     border: none;
-    color: #727272;
+    color: #404040;
     font-family: 'Barlow Condensed';
     font-size: 1.2rem;
     display: inline-flex;
@@ -42,7 +42,7 @@
 
 .custom-input:valid+.custom-input__placeholder,.custom-input:focus+.custom-input__placeholder{
     bottom: 2.4rem;
-    color: #5990DD;
+    color: #0866C3;
     transform: scale(0.9);
 }
 
