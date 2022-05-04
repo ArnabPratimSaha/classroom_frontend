@@ -3,11 +3,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    border: 1px solid #E0DFDC;
+    /* border: 1px solid #E0DFDC; */
     border-radius: 5px;
     background-color: white;
     padding: 10px;
-    box-shadow: 0 0 2px #E0DFDC;
+    /* box-shadow: 0 0 2px #E0DFDC; */
+    filter: drop-shadow(0 0 2px #E0DFDC);
     font-family: 'Barlow Condensed';
     margin-bottom: 20px;
 }

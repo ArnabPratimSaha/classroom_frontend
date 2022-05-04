@@ -2,13 +2,18 @@
     width: 100%;
     max-width: 40rem;
     background-color: white;
-    border: 1px solid #E0DFDC;
+    /* border: 1px solid #E0DFDC; */
     border-radius: 5px;
     color: #818080;
     font-family: 'Barlow Condensed';
     padding: 10px;
     margin-bottom: 10px;
     cursor: pointer;
+    transition: filter 200ms ease-in-out;
+}
+
+.each-completed-task__full-div:hover{
+    filter: drop-shadow(0 0 10px #e9e9e9);
 }
 
 .each-completed-task__title{

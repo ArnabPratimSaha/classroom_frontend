@@ -1,0 +1,43 @@
+.add-contact-details-form__div{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 30rem;
+    background-color: white;
+    border-radius: 2px;
+    font-family: 'Barlow Condensed';
+    z-index: 2;
+    padding: 10px;
+    border: 1px solid #e0dfdc;
+    display: none;
+}
+
+.add-contact__form{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    row-gap: 10px;
+    column-gap: 5px;
+    align-items: center;
+}
+
+.add-contact__icons{
+    font-size: 1.5rem;
+    color: #455265;
+}
+
+.add-contact__input{
+    border: none;
+    outline: none;
+
+    border: 1px solid #455265;
+    border-radius: 4px;
+    height: 2rem;
+    font-family: 'Barlow Condensed';
+    color: #404040;
+    font-size: 1.1rem;
+    font-weight: 300;
+    padding: 0 5px;
+}

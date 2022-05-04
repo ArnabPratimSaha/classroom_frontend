@@ -20,6 +20,7 @@ import LeftNavbar from "./components/LeftNavbar/LeftNavbar";
 import ClassToDo from "./pages/ClassToDo/ClassToDo";
 import ClassPeople from "./pages/ClassPeople/ClassPeople";
 import { useDispatch, useSelector } from 'react-redux';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 const Home = lazy(() => import("./pages/Home/Home"))
 const Calendar = lazy(() => import("./pages/Calendar/Calendar"));
@@ -63,6 +64,7 @@ function App() {
               <Route path="class-todo/:classId" element={<ClassToDo />} />
               <Route path="class-people/:classId" element={<ClassPeople />} />
               <Route path="assignment/:classId/:assignmentId" element={<AssignmentPage />} />
+              <Route path="profilepage/:userId" element={<ProfilePage />} />
             </Route>
           </Route>
           <Route path="*" element={<Navigate to="/" />} />

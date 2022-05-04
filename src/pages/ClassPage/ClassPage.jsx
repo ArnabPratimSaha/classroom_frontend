@@ -19,9 +19,9 @@ const ClassPage = () => {
     const navigate = useNavigate();
 
     const { isLoggedIn, accessToken, refreshToken, user, id } = useSelector(state => state.userReducer);
-    
-    const [classData , setClassData] = useState(null);
-    const [assignmentsArray , setAssignmentsArray] = useState([]);
+
+    const [classData, setClassData] = useState(null);
+    const [assignmentsArray, setAssignmentsArray] = useState([]);
 
     useEffect(() => {
         dispatch(classPage(true))
@@ -32,69 +32,90 @@ const ClassPage = () => {
 
     useEffect(() => {
 
-        const func = async() => {
-            if(!id || !refreshToken || !accessToken || !classId) return;
+        const func = async () => {
+            if (!id || !refreshToken || !accessToken || !classId) return;
 
             try {
                 const res = await axios({
-                    method : 'GET',
-                    url : `${process.env.REACT_APP_API}/class/info`,
-                    headers : {
-                        id : id,
-                        accesstoken : accessToken,
-                        refreshtoken : refreshToken,
-                        classid : classId,
+                    method: 'GET',
+                    url: `${process.env.REACT_APP_API}/class/info`,
+                    headers: {
+                        id: id,
+                        accesstoken: accessToken,
+                        refreshtoken: refreshToken,
+                        classid: classId,
                     }
                 });
-    
-                if(res.status === 200){
+
+                if (res.status === 200) {
                     setClassData(res.data.classData);
                 }
             } catch (error) {
-                console.log({error});
+                console.log({ error });
             }
         }
 
         func();
 
-    },[id , classId , accessToken , refreshToken])
+    }, [id, classId, accessToken, refreshToken])
 
     useEffect(() => {
 
-        const func = async() => {
+        const func = async () => {
 
-            if(!id || !refreshToken || !accessToken || !classId) return;
+            if (!id || !refreshToken || !accessToken || !classId) return;
 
             try {
                 const res = await axios({
-                    method : 'GET',
-                    url : `${process.env.REACT_APP_API}/assignment/allassignments`,
-                    headers : {
-                        id : id,
-                        accesstoken : accessToken,
-                        refreshtoken : refreshToken,
-                        classid : classId,
+                    method: 'GET',
+                    url: `${process.env.REACT_APP_API}/assignment/allassignments`,
+                    headers: {
+                        id: id,
+                        accesstoken: accessToken,
+                        refreshtoken: refreshToken,
+                        classid: classId,
                     }
                 });
-    
-                if(res.status === 200){
+
+                if (res.status === 200) {
                     console.log(res.data.assignments.length);
                     setAssignmentsArray(res.data.assignments);
                 }
             } catch (error) {
-                console.log({error});
+                console.log({ error });
             }
 
         }
 
         func();
 
-    },[id , classId , accessToken , refreshToken])
+    }, [id, classId, accessToken, refreshToken])
 
 
-    useEffect(() => {
-        console.log(assignmentsArray);
-    },[assignmentsArray])
+    const newAssignmentFormSubmitHandler = async () => {
+        // refetch assignments
+
+        if (!id || !refreshToken || !accessToken || !classId) return;
+
+        try {
+            const res = await axios({
+                method: 'GET',
+                url: `${process.env.REACT_APP_API}/assignment/allassignments`,
+                headers: {
+                    id: id,
+                    accesstoken: accessToken,
+                    refreshtoken: refreshToken,
+                    classid: classId,
+                }
+            });
+
+            if (res.status === 200) {
+                setAssignmentsArray(res.data.assignments);
+            }
+        } catch (error) {
+            console.log({ error });
+        }
+    }
 
     return (
         <>
@@ -104,6 +125,7 @@ const ClassPage = () => {
                 classId={classId && classId}
                 accessToken={accessToken && accessToken}
                 refreshToken={refreshToken && refreshToken}
+                onFormSubmitHandler={newAssignmentFormSubmitHandler && newAssignmentFormSubmitHandler}
             />
             <div className="class-feed__full-div">
                 <div className="class-feed__inner-div">
@@ -124,16 +146,16 @@ const ClassPage = () => {
                     <div className="class-feed__all-posts">
                         {
                             assignmentsArray && assignmentsArray.length > 0 && assignmentsArray.map((eachAssignment) => {
-                                return(
+                                return (
                                     <PostCard
-                                        viewAssignmentButtonClickHandler = {() => {
+                                        viewAssignmentButtonClickHandler={() => {
                                             navigate(`/assignment/${classId}/${eachAssignment.id}`)
                                         }}
-                                        key = {eachAssignment.id}
-                                        type = 'ASSIGNMENT'
-                                        assignmentTitle = {eachAssignment.title}
-                                        uploadDate = {new Date(eachAssignment.createdAt)}
-                                        dueDate = {eachAssignment.lastSubmittedDate && new Date(eachAssignment.lastSubmittedDate)}
+                                        key={eachAssignment.id}
+                                        type='ASSIGNMENT'
+                                        assignmentTitle={eachAssignment.title}
+                                        uploadDate={new Date(eachAssignment.createdAt)}
+                                        dueDate={eachAssignment.lastSubmittedDate && new Date(eachAssignment.lastSubmittedDate)}
                                     />
                                 )
                             })

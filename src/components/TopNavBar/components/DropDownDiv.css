@@ -5,10 +5,10 @@
     width: 8rem;
     position: absolute;
     right: 0;
-    top: 110%;
+    top: 135%;
     border-radius: 5px;
-    /* filter: drop-shadow(0 0 1px #E0DFDC); */
-    border: 1px solid #E0DFDC;
+    box-shadow: 0 16px 48px rgb(0 0 0 / 20%);
+    border: 1px solid rgba(0, 0 , 0, 0.125);
     display: none;
     justify-content: center;
     align-items: center;
@@ -25,17 +25,19 @@
 
 .drop-down__div::before{
     content: ""; 
-    height: 1rem;
-    width: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
     background-color: white;
     position: absolute;
-    right: 3px;
-    top: -7px;
+    right: 1px;
+    top: -12px;
     transform: rotate(45deg);
     z-index: 2;
     cursor: default;
-    border-left: 1px solid #E0DFDC;
-    border-top: 1px solid #E0DFDC;
+    /* border-left: 1px solid #E0DFDC;
+    border-top: 1px solid #E0DFDC; */
+    border-radius: 4px 0 0 0;
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
 }
 
 .drop-down__div-items{
