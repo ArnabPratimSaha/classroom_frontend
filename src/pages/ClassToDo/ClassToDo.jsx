@@ -1,7 +1,7 @@
 import axios from "axios";
 import { memo, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { classPage } from "../../redux/actions/actions";
 import './ClassToDo.css'
 import AssignedTasks from "./components/AssignedTasks";
@@ -10,8 +10,11 @@ import CompletedTasks from "./components/CompletedTasks";
 const ClassToDo = () => {
     const {classId} = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { id , accessToken , refreshToken } = useSelector(state => state.userReducer);
+    const [showCompletedTasks , setShowCompletedTasks] = useState(false);
+    const [allAssignments, setAllAssignments] = useState([]);
 
     useEffect(() => {
         dispatch(classPage(true))
@@ -20,7 +23,6 @@ const ClassToDo = () => {
         }
     },[])
 
-    const [showCompletedTasks , setShowCompletedTasks] = useState(false);
 
     const showAssignedTaskHandler = (e) => {
         setShowCompletedTasks(false);
@@ -38,7 +40,7 @@ const ClassToDo = () => {
             try {
                 const res = await axios({
                     method : 'GET',
-                    url : `${process.env.REACT_APP_API}/class/info`,
+                    url : `${process.env.REACT_APP_API}/assignment/allassignments`,
                     headers : {
                         id : id,
                         accesstoken : accessToken,
@@ -48,7 +50,8 @@ const ClassToDo = () => {
                 });
     
                 if(res.status === 200){
-                    console.log({res : res.data});
+                    console.log(res.data.assignments);
+                    setAllAssignments(res.data.assignments);
                 }
                 
             } catch (error) {
@@ -73,7 +76,16 @@ const ClassToDo = () => {
                     <div style = {{marginTop : '5px'}} className="underline"></div>
                     <br/>
                     <div className="class__to-do__content-div">
-                        {showCompletedTasks ? <CompletedTasks/> : <AssignedTasks/>}
+                        {/* {showCompletedTasks ? <CompletedTasks/> : <AssignedTasks/>} */}
+                        {
+                            allAssignments && allAssignments.length > 0 && allAssignments.map((e) => {
+                                return new Date() >= new Date(e.lastSubmittedDate)  ?  (showCompletedTasks && <CompletedTasks onClick = {() => {
+                                    navigate(`/assignment/${classId}/${e.id}`)
+                                }} key = {e._id} assignment = {e} />) : (!showCompletedTasks && <AssignedTasks onClick = {() => {
+                                    navigate(`/assignment/${classId}/${e.id}`)
+                                }} key = {e._id} assignment = {e} />)
+                            })
+                        }
                     </div>
                 </div>
             </div>
