@@ -160,12 +160,12 @@ const ClassPage = () => {
                                 )
                             })
                         }
-                        <PostCard
+                        {/* <PostCard
                             // type = 'ASSIGNMENT'
                             meetingTitle='Hashing'
                             uploadDate={new Date()}
                             meetingScheduleDate={new Date()}
-                        />
+                        /> */}
                     </div>
                     <button
                         onClick={() => {

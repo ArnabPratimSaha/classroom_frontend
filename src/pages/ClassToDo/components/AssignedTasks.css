@@ -17,8 +17,8 @@
 }
 
 .each-assigned-task__title{
-    color: #404040;
-    font-weight: 400;
+    color: #6264A7;
+    font-weight: 500;
     font-size: 1.2rem;
 }
 
@@ -31,4 +31,5 @@
 
 .each-assigned-task__icon{
     margin-right: 10px;
+    color: #6264A7;
 }

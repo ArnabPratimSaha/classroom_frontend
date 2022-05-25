@@ -1,25 +1,20 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import './CompletedTasks.css'
 import { FaRegDotCircle } from 'react-icons/fa'
 
-const CompletedTasks = () => {
+const CompletedTasks = ({assignment, id, onClick}) => {
 
-    const [completedTasksArray , setCompletedTasksArray] = useState([{
-        title : 'Make a Hash Table with generic array',
-        isSubmitted : true
-    }]);
-
-    return(
-        <div className='completed-tasks__full-div'>
-            {completedTasksArray && completedTasksArray.map((eachCompletedTask  , index) => {
-                return(
-                    <div key = {Math.random()} className='each-completed-task__full-div'>
-                        <span className='each-completed-task__title'>{eachCompletedTask.title && eachCompletedTask.title}</span>
-                        <br/>
-                        <span style = {{color : eachCompletedTask.isSubmitted ? 'green' : 'red'}} className='each-completed-task__is-completed'><FaRegDotCircle className='each-completed-task__icon' />{eachCompletedTask.isSubmitted ? "Submitted" : "Not Submitted"}</span>
-                    </div>
-                )
-            })}
+    return (
+        <div onClick={() => {
+            onClick && onClick()
+        }} key={Math.random()} className='each-completed-task__full-div'>
+            <span className='each-completed-task__title'>{assignment && assignment.title}</span>
+            <br />
+            <span
+                style = {{color : (assignment && assignment.submittedStudent && assignment.submittedStudent.includes(id)) ? 'green' : 'red'}} 
+                className='each-completed-task__is-completed'><FaRegDotCircle className='each-completed-task__icon' />
+                {(assignment && assignment.submittedStudent && assignment.submittedStudent.includes(id)) ? "Submitted" : "Not Submitted"}
+            </span>
         </div>
     )
 }
